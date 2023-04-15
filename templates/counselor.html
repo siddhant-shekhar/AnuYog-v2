@@ -3,7 +3,7 @@
   
   <head>
     
-    <title>AnuYog</title>
+    <title>Counselor - AnuYog</title>
     <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
     
     {% include 'bootstrap_css.html' %}
@@ -26,8 +26,8 @@
 
       <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Become a Counselor</h1>
 
-      <div>
-        <form class="lead" method="post">
+      <div class="mb-4">
+        <form class="lead" action="/counselor/registered" method="post">
           <div class="mb-2">
           <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">User Name</label><br>
           <input class="form-control" type="text" required name="counselor_name" placeholder="srm">
@@ -70,10 +70,10 @@
         
           <div class="mb-2">
             <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Desciption:</label><br>
-            <textarea class="form-control" name="dec" placeholder="Tell something about yourself........"></textarea>
+            <textarea class="form-control" name="about" placeholder="Tell something about yourself........"></textarea>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary btn-lg" type="submit">Register</button>
           </div>
         </form>
       </div>
