@@ -4,8 +4,18 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def hello_world():
+def landing_page():
   return render_template('home.html')
+
+
+@app.route("/questions")
+def questions():
+  return render_template('questions.html')
+
+
+@app.route("/bcounselor")
+def bcounselor():
+  return render_template('bcounselor.html')
 
 
 if __name__ == "__main__":
