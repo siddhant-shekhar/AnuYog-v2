@@ -36,6 +36,12 @@ def answers():
   return render_template('answers.html', answers=data)
 
 
+@app.route("/select_counselor")
+def select_counselor():
+  
+  return render_template('select_counselor.html')
+
+
 # @app.route("/api/counselor-registered")
 # def
 
