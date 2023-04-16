@@ -9,21 +9,34 @@ engine = create_engine(db_connection_string,
                        }})
 
 
-def load_counselor_from_db(counselor_name):
+def load_counselors_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM counselor_anuyog"))
-    rows = result.all()
-    if len(rows) == 0:
-      return None
-    else:
-      return rows[0]._mapping
+    result = conn.execute(
+      text(
+        "SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM counselor_anuyog"
+      ))
+    counselors = []
+    for row in result.fetchall():
+      counselor = {
+        'counselor_name': row[0],
+        'name': row[1],
+        'gender': row[2],
+        'age': row[3],
+        'occupation': row[4],
+        'time': row[5],
+        'about': row[6],
+        'phone_no': row[7],
+        'email': row[8]
+      }
+      counselors.append(counselor)
+    return counselors
 
 
 def add_counselor_to_db(data):
   with engine.connect() as conn:
     query = text(
-      """INSERT INTO counselor_anuyog (counselor_name, name, gender, age, occupation, time_range, about, phone_no, email)
-                        VALUES (:counselor_name, :name, :gender, :age, :occupation, :time_range, :about, :phone_no, :email)"""
+      """INSERT INTO counselor_anuyog (counselor_name, name, gender, age, occupation, time, about, phone_no, email)
+                        VALUES (:counselor_name, :name, :gender, :age, :occupation, :time, :about, :phone_no, :email)"""
     )
     params = {
       'counselor_name': data['counselor_name'],
@@ -31,12 +44,23 @@ def add_counselor_to_db(data):
       'gender': data['gender'],
       'age': data['age'],
       'occupation': data['occupation'],
-      'time_range': data['time_range'],
+      'time': data['time'],
       'about': data['about'],
       'phone_no': data['phone_no'],
       'email': data['email']
     }
     conn.execute(query, params)
+
+def selected_counselor_from_db(counselor_name):
+  with engine.connect() as conn:
+    result = conn.execute(text(f"SELECT * FROM counselor_anuyog WHERE counselor_name = '{counselor_name}'"))
+    rows = result.all()
+    if len(rows) == 0:
+      return None
+    else:
+      return rows[0]._mapping
+
+
 
 
 def add_answers_to_db(data):
@@ -80,3 +104,15 @@ def add_answers_to_db(data):
     }
 
     conn.execute(query, params)
+
+
+# def load_available_counselors_from_db(gender):
+#   with engine.connect() as conn:
+#     result = conn.execute(
+#       text("SELECT * FROM jobs WHERE gender = :gender"),
+#       gender=gender)
+#     rows = result.all()
+#     if len(rows) == 0:
+#       return None
+#     else:
+#       return dict(rows[0])
