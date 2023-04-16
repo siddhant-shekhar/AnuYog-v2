@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    
+    <title>Answers - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+    
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+    
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+    <div class="image-container" style="width: 100%;max-height: 950px;overflow: hidden; align-content: center;">
+      <img src="https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
+    </div>
+
+        
+    <div class="container">
+      
+
+      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Your Answers</h1>
+  
+
+      <b>Little interest or pleasure in doing things:</b>
+      <div class="mb-2">{{answers['question_1']}}</div>
+
+      <b>Feeling down, depressed, or hopeless:</b>
+      <div class="mb-2">{{answers['question_2']}}</div>
+
+      <b>Trouble falling or staying asleep, or sleeping too much:</b>
+      <div class="mb-2">{{answers['question_3']}}</div>
+
+      <b>Feeling tired or having little energy:</b>
+      <div class="mb-2">{{answers['question_4']}}</div>
+
+      <b>Poor appetite or overeating:</b>
+      <div class="mb-2">{{answers['question_5']}}</div>
+
+      <b>Feeling bad about yourself—or that you are a failure or have let yourself or your family down:</b>
+      <div class="mb-2">{{answers['question_6']}}</div>
+
+      <b>Trouble concentrating on things such as reading the newspaper or watching television::</b>
+      <div class="mb-2">{{answers['question_7']}}</div>
+
+      <b>Moving or speaking so slowly that other people could have noticed. Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual:</b>
+      <div class="mb-2">{{answers['question_8']}}</div>
+
+      <b>Thoughts that you would be better off dead or of hurting yourself in some way:</b>
+      <div class="mb-2">{{answers['question_9']}}</div>
+
+      <b>I feel pleasant:</b>
+      <div class="mb-2">{{answers['question_10']}}</div>
+
+      <b>I feel nervous and restless:</b>
+      <div class="mb-2">{{answers['question_11']}}</div>
+
+      <b>I feel satisfied with myself:</b>
+      <div class="mb-2">{{answers['question_12']}}</div>
+
+      <b>I wish I could be as happy as others seem to be:</b>
+      <div class="mb-2">{{answers['question_13']}}</div>
+
+      <b>I feel like a failure:</b>
+      <div class="mb-2">{{answers['question_14']}}</div>
+
+      <b>I feel rested:</b>
+      <div class="mb-2">{{answers['question_15']}}</div>
+
+      <b>I am “calm, cool, and collected:</b>
+      <div class="mb-2">{{answers['question_16']}}</div>
+
+      <b>I feel that difficulties are piling up so that I cannot overcome them:</b>
+      <div class="mb-2">{{answers['question_17']}}</div>
+
+      <b>I worry too much over something that really doesn’t matter:</b>
+      <div class="mb-2">{{answers['question_18']}}</div>
+
+      <b>I am happy:</b>
+      <div class="mb-2">{{answers['question_19']}}</div>
+
+      <b>I have disturbing thoughts:</b>
+      <div class="mb-2">{{answers['question_20']}}</div>
+
+      <b>I lack self-confidence:</b>
+      <div class="mb-2">{{answers['question_21']}}</div>
+
+      <b>I feel secure:</b>
+      <div class="mb-2">{{answers['question_22']}}</div>
+
+      <b>I make decisions easily:</b>
+      <div class="mb-2">{{answers['question_23']}}</div>
+
+      <b>I feel inadequate:</b>
+      <div class="mb-2">{{answers['question_24']}}</div>
+
+      <b>I am content:</b>
+      <div class="mb-2">{{answers['question_25']}}</div>
+
+      <b>Some unimportant thought runs through my mind and bothers me:</b>
+      <div class="mb-2">{{answers['question_26']}}</div>
+
+      <b>I take disappointments so keenly that I can’t put them out of my mind:</b>
+      <div class="mb-2">{{answers['question_27']}}</div>
+
+      <b>I am a steady person:</b>
+      <div class="mb-2">{{answers['question_28']}}</div>
+
+      <b>I get in a state of tension or turmoil as I think over my recent concerns:</b>
+      <div class="mb-2">{{answers['question_29']}}</div>
+
+      <b>Tell us about yourself:</b>
+      <div class="mb-2">{{answers['question_30']}}</div>
+
+    </div>
+    
+    <div class="text-center">
+      <a href="/" type="button" class="btn btn-outline-primary">Consult Now</a>
+    </div>
+      
+  
+      {% include 'footer.html' %}
+    </div>
+
+    
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+    
+  </body>
+
+</html>

@@ -3,7 +3,7 @@
   
   <head>
     
-    <title>Counselor - AnuYog</title>
+    <title>Counselor({{counselor['name']}}) - AnuYog</title>
     <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
     
     {% include 'bootstrap_css.html' %}
@@ -24,7 +24,7 @@
     <div class="container">
       
 
-      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">You are registered as a Counselor</h1>
+      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">You are now registered as a Counselor, {{counselor['name']}}</h1>
   
 
       <b>Full Name</b>
@@ -49,7 +49,7 @@
       <div class="mb-2">{{counselor['occupation']}}</div>
   
       <b>About You</b>
-      <div class="mb-2">{{counselor['des']}}</div>
+      <div class="mb-2">{{counselor['about']}}</div>
     </div>
     
     <div class="text-center">
