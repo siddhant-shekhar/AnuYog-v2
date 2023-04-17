@@ -9,6 +9,16 @@ def landing_page():
   return render_template('home.html')
 
 
+@app.route("/visualization")
+def visualization():
+  return render_template('visualization.html')
+
+
+@app.route("/self-help")
+def self_help():
+  return render_template('self_help.html')
+
+
 @app.route("/counselor")
 def counselor():
   return render_template("counselor.html")
@@ -48,7 +58,7 @@ def show_counselor(counselor_name):
   if not counselor:
     return "Not Found", 404
 
-  return render_template('counselor_page.html', counselor= counselor)
+  return render_template('counselor_page.html', counselor=counselor)
 
 
 # @app.route("/available_counselors", methods=['post'])
