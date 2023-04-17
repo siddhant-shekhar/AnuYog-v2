@@ -3,7 +3,7 @@
   
   <head>
     
-    <title>Available Counselor - AnuYog</title>
+    <title>Select Counselor - AnuYog</title>
     <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
     
     {% include 'bootstrap_css.html' %}
@@ -16,7 +16,7 @@
     <!--navigation bar-->
     {% include 'nav.html' %}
 
-    <div class="image-container" style="width: 100%;max-height: 950px;overflow: hidden; align-content: center;">
+    <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
       <img src="https://images.unsplash.com/reserve/wi9yf7kTQxCNeY72cCY6_Images%20of%20Jenny%20Lace%20Plasticity%20Publish%20%284%20of%2025%29.jpg?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
     </div>
 
@@ -24,6 +24,29 @@
     <div class="container">
       
 
+      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Choose your Counselor</h1>
+        
+      <div style="margin-left:420px;">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_njobaah2.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"  loop  autoplay></lottie-player>
+      </div>
+
+
+      <div class="row">
+      {% for counselors in counselors %}
+        <div class="col-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">{{counselors['name']}}</h3>
+              <h6>{{counselors['gender']}}</h6>
+              <h6>{{counselors['age']}}</h6>
+              <h6>{{counselors['occupation']}}</h6>
+              <a href="/counselor/{{counselors['counselor_name']}}" class="btn btn-primary">More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
       
       
   
@@ -37,3 +60,29 @@
   </body>
 
 </html>
+
+
+
+
+
+
+
+<!-- <h3>counselors list:</h3>
+<ul>
+  {% for counselors in counselors %}
+  <li>{{counselors['name']}}</li>
+  {% endfor %}
+</ul>
+
+
+<div class="row mb-4">
+  <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select gender of counselor:</label><br>
+  <div class="col-4">
+    <select class="form-select" aria-label="Default select example">
+      <option selected>gender</option>
+      {% for counselors in counselors %}
+      <option>{{counselors['gender']}}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div> -->

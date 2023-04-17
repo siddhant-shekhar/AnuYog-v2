@@ -32,6 +32,31 @@ def load_counselors_from_db():
     return counselors
 
 
+
+def load_distinct_time_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(
+      text("SELECT distinct time FROM counselor_anuyog order by time asc"))
+    time = []
+    for row in result.fetchall():
+      times = { 'time': row[0] }
+      time.append(times)
+    return time
+
+
+def load_distinct_age_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(
+      text("SELECT distinct age FROM counselor_anuyog order by age asc"))
+    age = []
+    for row in result.fetchall():
+      ages = { 'time': row[0] }
+      age.append(ages)
+    return age
+
+
+
+
 def add_counselor_to_db(data):
   with engine.connect() as conn:
     query = text(
@@ -51,16 +76,18 @@ def add_counselor_to_db(data):
     }
     conn.execute(query, params)
 
+
 def selected_counselor_from_db(counselor_name):
   with engine.connect() as conn:
-    result = conn.execute(text(f"SELECT * FROM counselor_anuyog WHERE counselor_name = '{counselor_name}'"))
+    result = conn.execute(
+      text(
+        f"SELECT * FROM counselor_anuyog WHERE counselor_name = '{counselor_name}'"
+      ))
     rows = result.all()
     if len(rows) == 0:
       return None
     else:
       return rows[0]._mapping
-
-
 
 
 def add_answers_to_db(data):
@@ -116,3 +143,6 @@ def add_answers_to_db(data):
 #       return None
 #     else:
 #       return dict(rows[0])
+    # result = conn.execute(text("SELECT age FROM distinct_feature_anuyog"))
+    #   counselor = {'age': row[0]}
+    # return ages
