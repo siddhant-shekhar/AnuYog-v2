@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from database import add_counselor_to_db, add_answers_to_db, load_counselors_from_db, selected_counselor_from_db
+from database import add_counselor_to_db, load_counselors_from_db, selected_counselor_from_db, add_answers_to_db
 
 app = Flask(__name__)
 
@@ -19,9 +19,9 @@ def self_help():
   return render_template('self_help.html')
 
 
-@app.route("/counselor")
+@app.route("/counselor-register")
 def counselor():
-  return render_template("counselor.html")
+  return render_template("counselor_registration.html")
 
 
 @app.route("/counselor/registered", methods=['post'])
@@ -72,6 +72,16 @@ def show_counselor(counselor_name):
 def show_counselors():
   counselors = load_counselors_from_db()
   return jsonify(counselors)
+
+
+@app.route("/api/answers", methods=['GET', 'POST'])
+def show_answers():
+  if request.method == 'POST':
+    answers = dict(request.form)
+    return jsonify(answers)
+  else:
+    # Handle GET requests
+    return render_template("answers.html")
 
 
 @app.route("/contact-us")

@@ -32,14 +32,13 @@ def load_counselors_from_db():
     return counselors
 
 
-
 def load_distinct_time_from_db():
   with engine.connect() as conn:
     result = conn.execute(
       text("SELECT distinct time FROM counselor_anuyog order by time asc"))
     time = []
     for row in result.fetchall():
-      times = { 'time': row[0] }
+      times = {'time': row[0]}
       time.append(times)
     return time
 
@@ -50,11 +49,9 @@ def load_distinct_age_from_db():
       text("SELECT distinct age FROM counselor_anuyog order by age asc"))
     age = []
     for row in result.fetchall():
-      ages = { 'time': row[0] }
+      ages = {'time': row[0]}
       age.append(ages)
     return age
-
-
 
 
 def add_counselor_to_db(data):
@@ -143,6 +140,6 @@ def add_answers_to_db(data):
 #       return None
 #     else:
 #       return dict(rows[0])
-    # result = conn.execute(text("SELECT age FROM distinct_feature_anuyog"))
-    #   counselor = {'age': row[0]}
-    # return ages
+# result = conn.execute(text("SELECT age FROM distinct_feature_anuyog"))
+#   counselor = {'age': row[0]}
+# return ages

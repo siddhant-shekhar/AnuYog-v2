@@ -37,165 +37,390 @@
       </div>
 
 
-      <div class="mb-4"><p><h5>Apply a score as follows:<br>
-        <ul>   
-          <li>1 for Never</li>
-          <li>2 for Sometimes</li>
-          <li>3 for Frequently</li>
-          <li>4 for Almost always</li>
-        </ul>
-      </h5></p></div>
+      
 
 
       <div class="row">
         <div class="col-6">
           <div class="mb-4">
-            <form class="lead" action="/questions/answers" method="post">
+            <form name="questions" class="lead" action="/questions/answers" method="post">
 
               
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Little interest or pleasure in doing things:</label><br>
-              <input class="form-control" type="text" required name="question_1" placeholder="1/2/3/4">
+                <label for="question_1" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Little interest or pleasure in doing things:</label><br>
+                <div class="col-4">
+                  <select name="question_1" id="qestion_1" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling down, depressed, or hopeless:</label><br>
-              <input class="form-control" type="text" required name="question_2" placeholder="1/2/3/4">
+                <label for="question_2" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling down, depressed, or hopeless:</label><br>
+                <div class="col-4">
+                  <select name="question_2" id="question_2" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Trouble falling or staying asleep, or sleeping too much:</label><br>
-              <input class="form-control" type="text" required name="question_3" placeholder="1/2/3/4">
+                <label for="question_3" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Trouble falling or staying asleep, or sleeping too much:</label><br>
+                <div class="col-4">
+                  <select name="question_3" id="question_3" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling tired or having little energy:</label><br>
-              <input class="form-control" type="text" required name="question_4" placeholder="1/2/3/4">
+                <label for="question_4" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling tired or having little energy:</label><br>
+                <div class="col-4">
+                  <select name="question_4" id="question_4" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Poor appetite or overeating:</label><br>
-              <input class="form-control" type="text" required name="question_5" placeholder="1/2/3/4">
+                <label for="question_5" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Poor appetite or overeating:</label><br>
+                <div class="col-4">
+                  <select name="question_5" id="question_5" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling bad about yourself—or that you are a failure or have let yourself or your family down:</label><br>
-              <input class="form-control" type="text" required name="question_6" placeholder="1/2/3/4">
+                <label for="question_6" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Feeling bad about yourself—or that you are a failure or have let yourself or your family down:</label><br>
+                <div class="col-4">
+                  <select name="question_6" id="question_6" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Trouble concentrating on things such as reading the newspaper or watching television:</label><br>
-              <input class="form-control" type="text" required name="question_7" placeholder="1/2/3/4">
+                <label for="question_7" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Trouble concentrating on things such as reading the newspaper or watching television:</label><br>
+                <div class="col-4">
+                  <select name="question_7" id="question_7" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Moving or speaking so slowly that other people could have noticed. Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual:</label><br>
-              <input class="form-control" type="text" name="question_8" placeholder="1/2/3/4">
+                <label for="question_8" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Moving or speaking so slowly that other people could have noticed. Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual:</label><br>
+               <div class="col-4">
+                  <select name="question_8" id="question_8" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Thoughts that you would be better off dead or of hurting yourself in some way:</label><br>
-              <input class="form-control" type="text" required name="question_9" placeholder="1/2/3/4">
+                <label for="question_9" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Thoughts that you would be better off dead or of hurting yourself in some way:</label><br>
+                <div class="col-4">
+                  <select name="question_9" id="question_9" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel pleasant:</label><br>
-              <input class="form-control" type="text" required name="question_10" placeholder="1/2/3/4">
+                <label for="question_10" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel pleasant:</label><br>
+                <div class="col-4">
+                  <select name="question_10" id="question_10" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel nervous and restless:</label><br>
-              <input class="form-control" type="text" required name="question_11" placeholder="1/2/3/4">
+                <label for="question_11" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel nervous and restless:</label><br>
+                <div class="col-4">
+                  <select name="question_11" id="question_11" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel satisfied with myself:</label><br>
-              <input class="form-control" type="text" required name="question_12" placeholder="1/2/3/4">
+                <label for="question_12" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel satisfied with myself:</label><br>
+                <div class="col-4">
+                  <select name="question_12" id="question_12" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I wish I could be as happy as others seem to be:</label><br>
-              <input class="form-control" type="text" required name="question_13" placeholder="1/2/3/4">
+                <label for="question_13" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I wish I could be as happy as others seem to be:</label><br>
+                <div class="col-4">
+                  <select name="question_13" id="question_13" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel like a failure:</label><br>
-              <input class="form-control" type="text" required name="question_14" placeholder="1/2/3/4">
+                <label for="question_14" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel like a failure:</label><br>
+                <div class="col-4">
+                  <select name="question_14" id="question_14" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel rested:</label><br>
-              <input class="form-control" type="text" required name="question_15" placeholder="1/2/3/4">
+                <label for="question_15" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel rested:</label><br>
+                <div class="col-4">
+                  <select name="question_15" id="question_15" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am calm, cool, and collected:</label><br>
-              <input class="form-control" type="text" required name="question_16" placeholder="1/2/3/4">
+                <label for="question_16" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am calm, cool, and collected:</label><br>
+                <div class="col-4">
+                  <select name="question_16" id="question_16" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel that difficulties are piling up so that I cannot overcome them:</label><br>
-              <input class="form-control" type="text" required name="question_17" placeholder="1/2/3/4">
+                <label for="question_17" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel that difficulties are piling up so that I cannot overcome them:</label><br>
+                <div class="col-4">
+                  <select name="question_17" id="question_17" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I worry too much over something that really doesn’t matter:</label><br>
-              <input class="form-control" type="text" required name="question_18" placeholder="1/2/3/4">
+                <label for="question_18" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I worry too much over something that really doesn’t matter:</label><br>
+                <div class="col-4">
+                  <select name="question_18" id="question_18" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am happy:</label><br>
-              <input class="form-control" type="text" required name="question_19" placeholder="1/2/3/4">
+                <label for="question_19" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am happy:</label><br>
+                <div class="col-4">
+                  <select name="question_19" id="question_19" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I have disturbing thoughts:</label><br>
-              <input class="form-control" type="text" required name="question_20" placeholder="1/2/3/4">
+                <label for="question_20" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I have disturbing thoughts:</label><br>
+                <div class="col-4">
+                  <select name="question_20" id="question_20" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I lack self-confidence:</label><br>
-              <input class="form-control" type="text" required name="question_21" placeholder="1/2/3/4">
+                <label for="question_21" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I lack self-confidence:</label><br>
+                <div class="col-4">
+                  <select name="question_21" id="question_21" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel secure:</label><br>
-              <input class="form-control" type="text" required name="question_22" placeholder="1/2/3/4">
+                <label for="question_22" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel secure:</label><br>
+                <div class="col-4">
+                  <select name="question_22" id="question_22" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I make decisions easily:</label><br>
-              <input class="form-control" type="text" required name="question_23" placeholder="1/2/3/4">
+                <label for="question_23" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I make decisions easily:</label><br>
+                <div class="col-4">
+                  <select name="question_23" id="question_23" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel inadequate:</label><br>
-              <input class="form-control" type="text" required name="question_24" placeholder="1/2/3/4">
+                <label for="question_24" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I feel inadequate:</label><br>
+                <div class="col-4">
+                  <select name="question_24" id="question_24" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am content:</label><br>
-              <input class="form-control" type="text" required name="question_25" placeholder="1/2/3/4">
+                <label for="question_25" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am content:</label><br>
+                <div class="col-4">
+                  <select name="question_25" id="question_25" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Some unimportant thought runs through my mind and bothers me:</label><br>
-              <input class="form-control" type="text" required name="question_26" placeholder="1/2/3/4">
+                <label for="question_26" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Some unimportant thought runs through my mind and bothers me:</label><br>
+                <div class="col-4">
+                  <select name="question_26" id="question_26" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I take disappointments so keenly that I can’t put them out of my mind:</label><br>
-              <input class="form-control" type="text" required name="question_27" placeholder="1/2/3/4">
+                <label for="question_27" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I take disappointments so keenly that I can’t put them out of my mind:</label><br>
+                <div class="col-4">
+                  <select name="question_27" id="question_27" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am a steady person:</label><br>
-              <input class="form-control" type="text" required name="question_28" placeholder="1/2/3/4">
+                <label for="question_28" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I am a steady person:</label><br>
+                <div class="col-4">
+                  <select name="question_28" id="question_28" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
-              <label style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I get in a state of tension or turmoil as I think over my recent concerns:</label><br>
-              <input class="form-control" type="text" required name="question_29" placeholder="1/2/3/4">
+                <label for="question_29" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I get in a state of tension or turmoil as I think over my recent concerns:</label><br>
+                <div class="col-4">
+                  <select name="question_29" id="question_29" class="form-select" aria-label="Default select example">
+                    <option selected ></option>
+                    <option value="Never" >Never</option>
+                    <option value="Sometimes">Sometimes</option>
+                    <option value="Frequently">Frequently</option>
+                    <option value="Almost always">Almost always</option>
+                  </select>
+                </div>
               </div>
 
               <div class="mb-2">
