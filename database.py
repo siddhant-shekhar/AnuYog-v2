@@ -35,7 +35,7 @@ def load_counselors_from_db():
 def load_distinct_time_from_db():
   with engine.connect() as conn:
     result = conn.execute(
-      text("SELECT distinct time FROM counselor_anuyog order by time asc"))
+      text("SELECT distinct time FROM counselor_anuyog order by time asc;"))
     time = []
     for row in result.fetchall():
       times = {'time': row[0]}
@@ -49,9 +49,19 @@ def load_distinct_age_from_db():
       text("SELECT distinct age FROM counselor_anuyog order by age asc"))
     age = []
     for row in result.fetchall():
-      ages = {'time': row[0]}
+      ages = {'age': row[0]}
       age.append(ages)
     return age
+
+
+def load_distinct_gender_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT distinct gender FROM counselor_anuyog"))
+    gender = []
+    for row in result.fetchall():
+      genders = {'gender': row[0]}
+      gender.append(genders)
+    return gender
 
 
 def add_counselor_to_db(data):
@@ -82,9 +92,32 @@ def selected_counselor_from_db(counselor_name):
       ))
     rows = result.all()
     if len(rows) == 0:
-      return None
+      return "not available"
     else:
       return rows[0]._mapping
+
+
+def load_available_counselors_from_db(gender, age, time):
+  with engine.connect() as conn:
+    result = conn.execute(
+      text(
+        f"SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM counselor_anuyog WHERE gender = '{gender}' and age='{age}' and time='{time}'"
+      ))
+    counselors = []
+    for row in result.fetchall():
+      counselor = {
+        'counselor_name': row[0],
+        'name': row[1],
+        'gender': row[2],
+        'age': row[3],
+        'occupation': row[4],
+        'time': row[5],
+        'about': row[6],
+        'phone_no': row[7],
+        'email': row[8]
+      }
+      counselors.append(counselor)
+    return counselors
 
 
 def add_answers_to_db(data):
@@ -128,18 +161,3 @@ def add_answers_to_db(data):
     }
 
     conn.execute(query, params)
-
-
-# def load_available_counselors_from_db(gender):
-#   with engine.connect() as conn:
-#     result = conn.execute(
-#       text("SELECT * FROM jobs WHERE gender = :gender"),
-#       gender=gender)
-#     rows = result.all()
-#     if len(rows) == 0:
-#       return None
-#     else:
-#       return dict(rows[0])
-# result = conn.execute(text("SELECT age FROM distinct_feature_anuyog"))
-#   counselor = {'age': row[0]}
-# return ages
