@@ -3,6 +3,8 @@ from database import add_counselor_to_db, load_counselors_from_db, selected_coun
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'mysecretkey'  # set the secret key
+
 
 @app.route("/")
 def landing_page():
@@ -62,15 +64,6 @@ def select_counselor():
                          time=time)
 
 
-@app.route("/counselor/<counselor_name>")
-def show_counselor(counselor_name):
-  counselor = selected_counselor_from_db(counselor_name)
-  if not counselor:
-    return "Not Found", 404
-
-  return render_template('counselor_page.html', counselor=counselor)
-
-
 @app.route("/available_counselors", methods=['post', 'get'])
 def available_counselors():
   gender = request.form['gender']
@@ -78,6 +71,15 @@ def available_counselors():
   time = request.form['time']
   counselors = load_available_counselors_from_db(gender, age, time)
   return render_template('available_counselors.html', counselors=counselors)
+
+
+@app.route("/counselor/<counselor_name>")
+def show_counselor(counselor_name):
+  counselor = selected_counselor_from_db(counselor_name)
+  if not counselor:
+    return "Not Found", 404
+
+  return render_template('counselor_page.html', counselor=counselor)
 
 
 #######################################

@@ -13,7 +13,7 @@ def load_counselors_from_db():
   with engine.connect() as conn:
     result = conn.execute(
       text(
-        "SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM counselor_anuyog"
+        "SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM anuyog_counselor"
       ))
     counselors = []
     for row in result.fetchall():
@@ -32,31 +32,9 @@ def load_counselors_from_db():
     return counselors
 
 
-def load_distinct_time_from_db():
-  with engine.connect() as conn:
-    result = conn.execute(
-      text("SELECT distinct time FROM counselor_anuyog order by time asc;"))
-    time = []
-    for row in result.fetchall():
-      times = {'time': row[0]}
-      time.append(times)
-    return time
-
-
-def load_distinct_age_from_db():
-  with engine.connect() as conn:
-    result = conn.execute(
-      text("SELECT distinct age FROM counselor_anuyog order by age asc"))
-    age = []
-    for row in result.fetchall():
-      ages = {'age': row[0]}
-      age.append(ages)
-    return age
-
-
 def load_distinct_gender_from_db():
   with engine.connect() as conn:
-    result = conn.execute(text("SELECT distinct gender FROM counselor_anuyog"))
+    result = conn.execute(text("SELECT distinct gender FROM anuyog_counselor"))
     gender = []
     for row in result.fetchall():
       genders = {'gender': row[0]}
@@ -64,10 +42,32 @@ def load_distinct_gender_from_db():
     return gender
 
 
+def load_distinct_age_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(
+      text("SELECT distinct age FROM anuyog_counselor order by age asc"))
+    age = []
+    for row in result.fetchall():
+      ages = {'age': row[0]}
+      age.append(ages)
+    return age
+
+
+def load_distinct_time_from_db():
+  with engine.connect() as conn:
+    result = conn.execute(
+      text("SELECT distinct time FROM anuyog_counselor order by time asc;"))
+    time = []
+    for row in result.fetchall():
+      times = {'time': row[0]}
+      time.append(times)
+    return time
+
+
 def add_counselor_to_db(data):
   with engine.connect() as conn:
     query = text(
-      """INSERT INTO counselor_anuyog (counselor_name, name, gender, age, occupation, time, about, phone_no, email)
+      """INSERT INTO anuyog_counselor (counselor_name, name, gender, age, occupation, time, about, phone_no, email)
                         VALUES (:counselor_name, :name, :gender, :age, :occupation, :time, :about, :phone_no, :email)"""
     )
     params = {
@@ -88,7 +88,7 @@ def selected_counselor_from_db(counselor_name):
   with engine.connect() as conn:
     result = conn.execute(
       text(
-        f"SELECT * FROM counselor_anuyog WHERE counselor_name = '{counselor_name}'"
+        f"SELECT * FROM anuyog_counselor WHERE counselor_name = '{counselor_name}'"
       ))
     rows = result.all()
     if len(rows) == 0:
@@ -101,7 +101,7 @@ def load_available_counselors_from_db(gender, age, time):
   with engine.connect() as conn:
     result = conn.execute(
       text(
-        f"SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM counselor_anuyog WHERE gender = '{gender}' and age='{age}' and time='{time}'"
+        f"SELECT counselor_name, name, gender, age, occupation, time, about, phone_no, email FROM anuyog_counselor WHERE gender = '{gender}' and age='{age}' and time='{time}'"
       ))
     counselors = []
     for row in result.fetchall():
@@ -123,7 +123,7 @@ def load_available_counselors_from_db(gender, age, time):
 def add_answers_to_db(data):
   with engine.connect() as conn:
     query = text(
-      """INSERT INTO questions_anuyog(question_1,question_2,question_3,question_4,question_5,question_6,question_7,question_8,question_9,question_10,question_11,question_12,question_13,question_14,question_15,question_16,question_17,question_18,question_19,question_20,question_21,question_22,question_23,question_24,question_25,question_26,question_27,question_28,question_29,question_30 )
+      """INSERT INTO anuyog_questions(question_1,question_2,question_3,question_4,question_5,question_6,question_7,question_8,question_9,question_10,question_11,question_12,question_13,question_14,question_15,question_16,question_17,question_18,question_19,question_20,question_21,question_22,question_23,question_24,question_25,question_26,question_27,question_28,question_29,question_30 )
                         VALUES (:question_1,:question_2,:question_3,:question_4,:question_5,:question_6,:question_7,:question_8,:question_9,:question_10,:question_11,:question_12,:question_13,:question_14,:question_15,:question_16,:question_17,:question_18,:question_19,:question_20,:question_21,:question_22,:question_23,:question_24,:question_25,:question_26,:question_27,:question_28,:question_29,:question_30)"""
     )
 
