@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Questions- AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+      <div class="image-container" >
+      <img src="https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" style="width: 100%;height: 952px;object-fit: cover;overflow:hidden; align-content:center; " alt="Your image">
+    </div>
+
+    <div class="container">
+
+
+      <div class="text-center lead fs-2 mt-4 p-4" style="color:rgb(150,10,300);">
+        <b>Please answer TIPI (Ten Item Personality Inventory) questions:</b>
+      </div>
+
+      <div style="margin-left:500px;">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets4.lottiefiles.com/packages/lf20_au4zdsr8.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+      </div>
+
+      <!-- <div class="text-center">
+        <a href="/select_counselor" type="button" class="btn btn-outline-secondary">Skip</a>
+      </div> -->
+
+
+
+
+
+      <div class="row">
+        <div class="col-8">
+          <div class="mb-4">
+
+            <form name="questions1" class="lead" action="/questions1" method="post">
+
+
+              <div class="mb-2">
+                <label for="TIPI1" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Extraverted, enthusiastic</label><br>
+                <div class="col-4">
+                  <select name="TIPI1" id="TIPI1" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI2" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Critical, quarrelsome</label><br>
+                <div class="col-4">
+                  <select name="TIPI2" id="TIPI2" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI3" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Dependable, self-disciplined</label><br>
+                <div class="col-4">
+                  <select name="TIPI3" id="TIPI3" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI4" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Anxious, easily upset</label><br>
+                <div class="col-4">
+                  <select name="TIPI4" id="TIPI4" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI5" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Open to new experiences, complex</label><br>
+                <div class="col-4">
+                  <select name="TIPI5" id="TIPI5" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI6" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Reserved, quiet</label><br>
+                <div class="col-4">
+                  <select name="TIPI6" id="TIPI6" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI7" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Sympathetic, warm</label><br>
+                <div class="col-4">
+                  <select name="TIPI7" id="TIPI7" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI8" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Disorganized, careless</label><br>
+                <div class="col-4">
+                  <select name="TIPI8" id="TIPI8" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI9" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Calm, emotionally stable</label><br>
+                <div class="col-4">
+                  <select name="TIPI9" id="TIPI9" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="mb-2">
+                <label for="TIPI10" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Conventional, uncreative</label><br>
+                <div class="col-4">
+                  <select name="TIPI10" id="TIPI10" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Disagree Strongly</option>
+                    <option value= 2>Disagree Moderately</option>
+                    <option value= 3>Disagree a Little</option>
+                    <option value= 4>Neither Agree nor Disagree</option>
+                    <option value= 5>Agree a Litte</option>
+                    <option value= 6>Agree Moderately</option>
+                    <option value= 7>Agree Strongly</option>
+                  </select>
+                </div>
+              </div2
+
+
+              <br>
+
+              <div class="text-center">
+                <button class="btn btn-primary btn-lg" type="submit">Next</button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_V0pDim.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"  loop  autoplay></lottie-player>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+      {% include 'footer.html' %}
+    </div>
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>

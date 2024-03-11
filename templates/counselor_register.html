@@ -16,34 +16,46 @@
     <!--navigation bar-->
     {% include 'nav.html' %}
 
-    <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
+    <!-- <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
       <img src="https://images.unsplash.com/photo-1558522195-e1201b090344?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
-    </div>
+    </div> -->
 
         
     <div class="container">
       
 
-      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Become a Counselor</h1>
+      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(100,100,100);">Become a Counselor</h1>
 
 
       <div class="row">
         <div class="col-6">
           <div class="mb-4">
-            <form class="lead" action="/counselor/registered" method="post">
+            <form class="lead" action="/register_counselor" method="post">
+
               <div class="mb-2">
-              <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">User Name:</label><br>
-              <input class="form-control" type="text" required name="counselor_name" placeholder="srm">
+              <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
+              <input class= "form-control" type="email" required name="email" placeholder="srm@mrs.com">
               </div>
     
               <div class="mb-2">
               <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Name:</label><br>
               <input class="form-control" type="text" required name="name" placeholder="SRM Institute">
               </div>
+
+              <div class="mb-2">
+                <label for="pwd" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Password:</label><br>
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+              </div>
     
               <div class="mb-2">
               <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Gender:</label><br>
-              <input class="form-control" type="text" required name="gender" placeholder="Male/Female">
+              <!-- <input class="form-control" type="text" required name="gender" placeholder="Male/Female"> -->
+              <select class="form-control", required name="gender">
+                <option selected>select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
               </div>
     
               <div class="mb-2">
@@ -58,17 +70,24 @@
     
               <div class="mb-2">
               <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Your free time:</label><br>
-              <input class="form-control" type="text" required name="time" placeholder="17-22 --> only this format">
+              <select class="form-control", required name="time">
+                <option selected>select your free time</option>
+                <option value="10-11">10-11</option>
+                <option value="11-12">11-12</option>
+                <option value="12-13">12-13</option>
+                <option value="13-14">13-14</option>
+                <option value="14-15">14-15</option>
+                <option value="15-16">15-16</option>
+                <option value="16-17">16-17</option>
+                <option value="17-18">17-18</option>
+                <option value="18-19">18-19</option>
+                <option value="19-20">19-20</option>
+              </select> 
               </div>
     
               <div class="mb-2">
               <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Phone Number:</label><br>
               <input class="form-control" type="text" required name="phone_no" placeholder="91xxxxxxxxxx">
-              </div>
-            
-              <div class="mb-2">
-              <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
-              <input class= "form-control" type="email" required name="email" placeholder="srm@mrs.com">
               </div>
             
               <div class="mb-2">
@@ -82,9 +101,9 @@
           </div>
         </div>
 
-        <div class="col-6 align-self-center">
+        <div class = "col-6 align-self-center">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_ZLL9BMHuN9.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+          <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_ZLL9BMHuN9.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
         </div>
         
       </div>

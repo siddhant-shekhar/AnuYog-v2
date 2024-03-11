@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Questions- AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+      <div class="image-container" >
+      <img src="https://images.unsplash.com/photo-1617575521317-d2974f3b56d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" style="width: 100%;height: 952px;object-fit: cover;overflow:hidden; align-content:center; " alt="Your image">
+    </div>
+
+    <div class="container">
+
+
+      <div class="text-center lead fs-2 mt-4 p-4" style="color:rgb(150,10,300);">
+        <b>Please answer personal questions</b>
+      </div>
+
+      <div style="margin-left:500px;">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets4.lottiefiles.com/packages/lf20_au4zdsr8.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+      </div>
+
+      <!-- <div class="text-center">
+        <a href="/select_counselor" type="button" class="btn btn-outline-secondary">Skip</a>
+      </div> -->
+
+
+
+
+
+      <div class="row">
+        <div class="col-8">
+          <div class="mb-4">
+
+            <form name="questions2" class="lead" action="/questions2" method="post">
+
+
+              <div class="mb-2">
+                <label for="education" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">How much education have you completed?:</label><br>
+                <div class="col-4">
+                  <select name="education" id="education" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Less than high school</option>
+                    <option value= 2>High school</option>
+                    <option value= 3>University degree</option>
+                    <option value= 4>Graduate degree</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+
+              
+              <div class="mb-2">
+                <label for="urban" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">What type of area did you live when you were a child:</label><br>
+                <div class="col-4">
+                  <select name="urban" id="urban" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Rural (country side)</option>
+                    <option value= 2>Suburban</option>
+                    <option value= 3>Urban (town, city)</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+              
+              <div class="mb-2">
+                <label for="gender" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">What is your gender:</label><br>
+                <div class="col-4">
+                  <select name="gender" id="gender" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Male</option>
+                    <option value= 2>Female</option>
+                    <option value= 3>Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <br>
+              
+              <div class="mb-2">
+                <label for="married" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">What is your marital status:</label><br>
+                <div class="col-4">
+                  <select name="married" id="married" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Never married</option>
+                    <option value= 2>Currently married</option>
+                    <option value= 3>Previously married</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <br>
+
+              <div class="mb-2">
+                <label for="familysize" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Including you, how many children did your mother have:</label><br>
+                <div class="col-4">
+                  <select name="familysize" id="familysize" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 0 >Did not apply to me at all</option>
+                  </select>
+                </div>
+              </div> -->
+
+              <br>
+
+              <div class="mb-2">
+                <label for="familysize" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">Including you, how many children did your mother have:</label><br>
+                <input type="familysize" class="form-control" id="familysize" placeholder="Enter familysize" name="familysize">
+              </div>
+
+              <br>
+
+              
+              <div class="mb-2">
+                <label for="age_group" style="font-size:20px; color:rgb(100,100,100); font-family:Lucida Console;">How many years old are you:</label><br>
+                <div class="col-4">
+                  <select name="age_group" id="age_group" class="form-select" aria-label="Default select example">
+                    <option selected >Select any one</option>
+                    <option value= 1>Below 10</option>
+                    <option value= 2>10-16</option>
+                    <option value= 3>17-21</option>
+                    <option value= 4>22-35</option>
+                    <option value= 5>36-48</option>
+                    <option value= 6>Above 49</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Write what are you feeling know:</label><br>
+                <textarea class="form-control" name="about" placeholder="write something" required></textarea>
+              </div>
+
+
+              <br>
+
+              <div class="text-center">
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+
+        <div class="col-4 align-self-center">
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets8.lottiefiles.com/packages/lf20_V0pDim.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"  loop  autoplay></lottie-player>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+      {% include 'footer.html' %}
+    </div>
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>

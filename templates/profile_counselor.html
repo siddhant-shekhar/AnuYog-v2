@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>{{user.name}} - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+    <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
+      <img src="https://images.unsplash.com/photo-1595206133361-b1fe343e5e23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
+    </div>
+
+
+    <div class="container">
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>{{user.name}}</b>
+      </div>
+
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Gender:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.gender}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Age:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.age}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Occupation:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.occupation}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Free Time:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.time}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Phone No.:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.phone_no}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.email}}</a></label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">About:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.about}}</label>
+
+          </div>
+        </div>
+
+        <div class="col-6">
+          <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_M9p23l.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player> -->
+
+          <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+          <dotlottie-player src="https://lottie.host/c6afb391-61ac-470a-ba3d-f2ee81f7ca8e/n1W1647zRK.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        </div>
+      </div>
+
+
+      {% include 'footer.html' %}
+    </div>
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>
+
+
+<!-- https://wa.me/{{user.phone_no}}?text=Hello,%20{{user.name}}.%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you -->

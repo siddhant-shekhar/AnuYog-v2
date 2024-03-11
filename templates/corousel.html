@@ -11,7 +11,11 @@
         <div class="carousel-caption justify-content-around align-item-center">
           <p class="mt-5 fs-3 text-uppercase">Feeling Lonely</p>
           <h1 class="display-1 fw-bolder text-capitalize">Get someone to talk</h1>
-          <a href="/questions"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% if 'email' in session %}
+            <a href="/questions"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% else %}
+            <a href="/login_hero"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% endif %}
         </div>
       </div>
       <div class="carousel-item c-item" style="height: 955px;">
@@ -19,8 +23,11 @@
         <div class="carousel-caption justify-content-around align-item-center">
           <p class="text-uppercase fs-3 mt-5">Feeling Distracted</p>
           <p class="display-1 fw-bolder text-capitalize">Get someone to Guide</p>
-          <a href="/questions">
-            <button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% if 'email' in session %}
+            <a href="/questions"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% else %}
+            <a href="/login_hero"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% endif %}
         </div>
       </div>
       <div class="carousel-item c-item" style="height: 955px;">
@@ -28,9 +35,11 @@
         <div class="carousel-caption justify-content-around align-item-center">
           <p class="text-uppercase fs-3 mt-5">Feeling Depressed</p>
           <p class="display-1 fw-bolder text-capitalize">Just Smile</p>
-          <a href="/questions">
-            <button class="btn btn-primary px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-            data-bs-target="#booking-modal">Consult Now</button></a>
+          {% if 'email' in session %}
+            <a href="/questions"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% else %}
+            <a href="/login_hero"><button class="btn btn-primary px-4 py-2 fs-5 mt-5">Consult Now</button></a>
+          {% endif %}
         </div>
         </div>
       </div>

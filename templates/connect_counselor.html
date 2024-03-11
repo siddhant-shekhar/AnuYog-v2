@@ -3,7 +3,7 @@
   
   <head>
     
-    <title>{{counselor['name']}} - AnuYog</title>
+    <title>{{user.name}} - AnuYog</title>
     <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
     
     {% include 'bootstrap_css.html' %}
@@ -25,7 +25,7 @@
 
 
       <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
-        <b>{{counselor['name']}}</b>
+        <b>{{user.name}}</b>
       </div>
       
 
@@ -34,25 +34,25 @@
           <div class="row">
           
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Gender:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor['gender']}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.gender}}</label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Age:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor['age']}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.age}}</label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Occupation:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor['occupation']}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.occupation}}</label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Free Time:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor['time']}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.time}}</label>
             
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">About:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor['about']}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.about}}</label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">WhatsApp:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://wa.me/{{counselor['phone_no']}}" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(10,200,5);">WhatsApp me 💬</a></label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://wa.me/91{{user.phone_no}}" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(10,200,5);">WhatsApp me 💬</a></label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="mailto:{{counselor['email']}}?subject=Through%20Anuyog&body=Write%20about%20yourself" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,65,0);">Mail me 📧</a></label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="mailto:{{user.email}}?subject=Through%20Anuyog&body=Write%20about%20yourself" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,65,0);">Mail me 📧</a></label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Online Meet:</label><br>
             <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://meet.google.com/gig-xndy-yaq" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,0,0);">Google Meet</a></label>
@@ -78,4 +78,4 @@
 </html>
 
 
-<!-- https://wa.me/{{counselor['number']}}?text=Hello,%20{{counselor['name']}}.%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you -->
+<!-- https://wa.me/{{user.phone_no}}?text=Hello,%20{{user.name}}.%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you -->

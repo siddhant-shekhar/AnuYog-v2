@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Login - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+
+    <div class="container mt-3">
+      <div class= "row justify-content-center">
+        <div class="col-sm-8"><br><br><br>
+          <h2>Choose Your Role</h2>
+          <br>
+          <a href= "/login_hero" class="btn btn-outline-primary">Hero</a>
+          <a href= "/login_counselor" class="btn btn-outline-primary">Counselor</a>
+          
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--footer area-->
+    {% include 'footer.html' %}
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>

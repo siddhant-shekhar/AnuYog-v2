@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>{{user.name}} - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+    <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
+      <img src="https://images.unsplash.com/photo-1595206133361-b1fe343e5e23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
+    </div>
+
+
+    <div class="container">
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>{{user.name}}</b>
+      </div>
+
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Name:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.name}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.email}}</label>
+
+
+          </div>
+        </div>
+
+        <div class="col-6">
+          <!-- <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_M9p23l.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player> -->
+
+          <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+          <dotlottie-player src="https://lottie.host/c6afb391-61ac-470a-ba3d-f2ee81f7ca8e/n1W1647zRK.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        </div>
+      </div>
+
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>DASS Answers</b>
+      </div>
+
+
+      <div class = "row">
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found myself getting upset by quite trivial things:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q1A)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was aware of dryness of my mouth:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q2A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I couldn't seem to experience any positive feeling at all:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q3A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I experienced breathing difficulty (eg, excessively rapid breathing, breathlessness in the absence of physical exertion):</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q4A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I just couldn't seem to get going:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q5A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I tended to over-react to situations:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q6A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I had a feeling of shakiness (eg, legs going to give way):</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q7A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found it difficult to relax:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q8A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found myself in situations that made me so anxious I was most relieved when they ended:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q9A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that I had nothing to look forward to:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q10A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found myself getting upset rather easily:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q11A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that I was using a lot of nervous energy:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q12A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt sad and depressed:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q13A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found myself getting impatient when I was delayed in any way (eg, elevators, traffic lights, being kept waiting):</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q14A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I had a feeling of faintness:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q15A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that I had lost interest in just about everything:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q16A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt I wasn't worth much as a person:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q17A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that I was rather touchy:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q18A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I perspired noticeably (eg, hands sweaty) in the absence of high temperatures or physical exertion:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q19A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt scared without any good reason:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q20A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that life wasn't worthwhile:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q21A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found it hard to wind down:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q22A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I had difficulty in swallowing:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q23A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I couldn't seem to get any enjoyment out of the things I did:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q24A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was aware of the action of my heart in the absence of physical exertion (eg, sense of heart rate increase, heart missing a beat):</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q25A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt down-hearted and blue:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q26A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found that I was very irritable:</label><br> 
+        <label class="col-3 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q27A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt I was close to panic:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q28A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found it hard to calm down after something upset me:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q29A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I feared that I would be &quot;thrown&quot; by some trivial but unfamiliar task:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q30A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was unable to become enthusiastic about anything:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q31A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found it difficult to tolerate interruptions to what I was doing:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q32A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was in a state of nervous tension:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q33A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt I was pretty worthless:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q34A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was intolerant of anything that kept me from getting on with what I was doing:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q35A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt terrified:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q36A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I could see nothing in the future to be hopeful about:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q37A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I felt that life was meaningless:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q38A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found myself getting agitated:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q39A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I was worried about situations in which I might panic and make a fool of myself:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q40A)}}</label>
+  
+  
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I experienced trembling (eg, in the hands):</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q41A)}}</label>
+
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I found it difficult to work up the initiative to do things:</label><br> 
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{dass(user.Q42A)}}</label>
+                
+      </div>
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>TIPI Answers</b>
+      </div>
+
+      <div class = "row">
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Extraverted, enthusiastic:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI1)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Critical, quarrelsome:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI2)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Dependable, self-disciplined:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI3)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Anxious, easily upset:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI4)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Open to new experiences, complex:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI5)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Reserved, quiet:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI6)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Sympathetic, warm:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI7)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Disorganized, careless:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI8)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Calm, emotionally stable:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI9)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">I see myself as: Conventional, uncreative:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{tipi(user.TIPI10)}}</label>
+      </div>
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>Personal Answers</b>
+      </div>
+
+      <div class = "row">
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">How much education have you completed?:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{edu(user.education)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">What type of area did you live when you were a child:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{urban(user.urban)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">What is your gender:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{gender(user.gender)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">What is your marital status:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{married(user.married)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">Including you, how many children did your mother have:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.familysize}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">How many years old are you:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{age(user.age_group)}}</label>
+
+        <label class="col-7 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">About yourself:</label><br>
+        <label class="col-5 col-form-label" style="font-size:15px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.about}}</label>
+        
+      </div>
+
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>Results</b>
+      </div>
+
+      <div class = "row">
+
+        <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Depression level:</label><br>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+
+        <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Anxiety Level:</label><br>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+
+        <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Stress Level:</label><br>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+
+        <label class="col-7 col-form-label" style="font-size:18px;color:rgb(255,0,0); font-family:Lucida Console;">Suicidal Tendency:</label><br>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+        
+      </div>
+      
+
+      
+
+
+      {% include 'footer.html' %}
+    </div>
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>
