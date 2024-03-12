@@ -27,28 +27,27 @@
       <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Choose your Counselor</h1>
         
       <div style="margin-left:420px;">
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-<lottie-player src="https://assets6.lottiefiles.com/packages/lf20_njobaah2.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"  loop  autoplay></lottie-player>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+        <dotlottie-player src="https://lottie.host/6529a2dd-813c-4bc8-b1c0-f6a8a4a03e3f/4b6hncWLCk.json" background="transparent" speed="1" style="width: 500px; height: 500px;" loop autoplay></dotlottie-player>
       </div>
 
 
       <div class="row">
-        <div class="col-6">
+        <!-- <div class="col-6"> -->
+        <div class = "">
           <div class="mb-4">
             <form name="features" class="lead" action="/available_counselors" method="post">
 
 
 
-              
-
-
               <div class="row mb-4">
-                <label for="gender" class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select gender of counselor:</label><br>
-                <div class="col-4">
+                <label for="gender" class="col-6 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select "gender" of counselor:</label><br>
+                <div class="col-6">
                   <select name="gender" id="gender" class="form-select" aria-label="Default select example">
                     <option selected></option>
-                    {% for genders in genders %}
-                    <option value="{{genders['gender']}}">{{genders['gender']}}</option>
+                    {% for gender in genders %}
+                    <option value="{{gender}}">{{gender}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -56,12 +55,12 @@
 
 
               <div class="row mb-4">
-                <label for="age" class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select age of counselor:</label><br>
-                <div class="col-4">
-                  <select name="age" id="age" class="form-select" aria-label="Default select example">
+                <label for="occupation" class="col-6 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select "occupation" of counselor:</label><br>
+                <div class="col-6">
+                  <select name="occupation" id="occupation" class="form-select" aria-label="Default select example">
                     <option selected></option>
-                    {% for ages in ages %}
-                    <option value="{{ages['age']}}">{{ages['age']}}</option>
+                    {% for occupation in occupations %}
+                    <option value="{{occupation}}">{{occupation}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -69,12 +68,25 @@
 
 
               <div class="row mb-4">
-                <label for="time" class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select time of counselor:</label><br>
-                <div class="col-4">
+                <label for="time" class="col-6 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select "time" of counselor:</label><br>
+                <div class="col-6">
                   <select name="time" id="time" class="form-select" aria-label="Default select example">
                     <option selected></option>
-                    {% for time in time %}
-                    <option value="{{time['time']}}">{{time['time']}}</option>
+                    {% for time in times %}
+                    <option value="{{time}}">{{time}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="row mb-4">
+                <label for="age" class="col-6 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Select "age" of counselor:</label><br>
+                <div class="col-6">
+                  <select name="age" id="age" class="form-select" aria-label="Default select example">
+                    <option selected></option>
+                    {% for age in ages %}
+                    <option value="{{age}}">{{age}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -92,10 +104,10 @@
           </div>
         </div>
 
-        <div class="col-6 align-self-center">
+        <!-- <div class="col-6 align-self-center">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_V0pDim.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
-        </div>
+        </div> -->
         
       </div>
       

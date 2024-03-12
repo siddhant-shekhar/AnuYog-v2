@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>{{counselor.name}} - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+    <div class="image-container" style="width: 100%;max-height: 952px;overflow: hidden; align-content: center;">
+      <img src="https://images.unsplash.com/photo-1595206133361-b1fe343e5e23?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
+    </div>
+
+
+    <div class="container">
+
+
+      <div class="text-center lead fs-1 mt-4 p-4" style="color:rgb(100,10,10);">
+        <b>{{counselor.name}}</b>
+      </div>
+
+
+      <div class="row">
+        <div class="col-6">
+          <div class="row">
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Gender:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.gender}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Age:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.age}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Occupation:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.occupation}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Free Time:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.time}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Phone No.:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.phone_no}}</label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.email}}</a></label>
+
+            <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">About:</label><br>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.about}}</label>
+
+            <br><br><br><br>
+
+            {% if Connected %}
+              <div class="text-center"><button type="submit" class="btn btn-primary" disabled>{{Connected}}</button></div>
+  
+              <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">WhatsApp:</label><br>
+              <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://api.whatsapp.com/send/?phone=91{{counselor.phone_no}}&text=Hi%20{{counselor.name}},%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you.&type=phone_number&app_absent=0" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(10,200,5);">WhatsApp me 💬</a></label>
+  
+              <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Email:</label><br>
+              <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="mailto:{{counselor['email']}}?subject=Through%20Anuyog&body=Write%20about%20yourself" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,65,0);">Mail me 📧</a></label>
+  
+              <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Online Meet:</label><br>
+              <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://meet.google.com/gig-xndy-yaq" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,0,0);">Google Meet</a></label>
+
+            {% else %}
+              <form action="/counselor/profile" method="post">
+                <input type="hidden" name="email" value="{{counselor.email}}">
+                <input type="hidden" name="email_connect" value="{{counselor.email}}">
+                <div class="text-center"><button type="submit" class="btn btn-primary">Connect</button></div>
+              </form>
+
+            {% endif %}
+
+          </div>
+        </div>
+
+        <div class="col-6">
+
+          {% if counselor.gender == 'Male' %}
+
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+            <dotlottie-player src="https://lottie.host/635d73bb-2038-49e6-ad2d-833286609d0c/9cG49Ps1Qi.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></dotlottie-player>
+
+          {% else %}
+
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+            <dotlottie-player src="https://lottie.host/125cabb0-87a0-4e52-ab5f-1266d55270fa/Ed7Hjzkkxe.json" background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay></dotlottie-player>
+          
+          {% endif %}
+            
+        </div>
+      </div>
+
+
+      {% include 'footer.html' %}
+    </div>
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>
+
+
+<!-- https://wa.me/{{counselor.phone_no}}?text=Hello,%20{{counselor.name}}.%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you -->

@@ -33,15 +33,27 @@
 
 
       <div class="row">
-      {% for counselors in counselors %}
+      {% for counselor in counselors %}
         <div class="col-4">
           <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">{{counselors['name']}}</h3>
-              <h6>{{counselors['gender']}}</h6>
-              <h6>{{counselors['age']}}</h6>
-              <h6>{{counselors['occupation']}}</h6>
-              <a href="/counselor/{{counselors['counselor_name']}}" class="btn btn-primary">More</a>
+            <div class="row card-body">
+              <div class = "col-6">
+                <div class="text-center"><h3 class="card-title">{{counselor.name}}</h3></div>
+                <h6>{{counselor.gender}}</h6>
+                <h6>{{counselor.age}}</h6>
+                <h6>{{counselor.occupation}}</h6><br>
+                <!-- <div class = "text-center"><a href="/counselor/profile" class="btn btn-primary">More</a></div> -->
+                <form action="/counselor/profile" method="post">
+                    <input type="hidden" name="email" value="{{counselor.email}}">
+                    <div class="text-center"><button type="submit" class="btn btn-primary">More</button></div>
+                </form>
+                
+              </div>
+              <div class = "col-6 align-self-center">
+                <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+                <dotlottie-player src="https://lottie.host/aafe57e4-cd8e-4578-a0ec-fa43d4582d4f/7DgarSlf8R.json" background="transparent" speed="1" style="width: 180px; height: 180px;" loop autoplay></dotlottie-player>
+              </div>
             </div>
           </div>
         </div>

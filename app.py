@@ -78,10 +78,12 @@ class userHero(db.Model):
   age_group = db.Column(db.Integer)
   about = db.Column(db.String(1000))
 
-  # d_result = db.Column(db.String(100))
-  # a_result = db.Column(db.String(100))
-  # s_result = db.Column(db.String(100))
-  # suicidal_result = db.Column(db.String(100))
+  counselor = db.Column(db.String(100))
+
+  d_result = db.Column(db.String(100))
+  a_result = db.Column(db.String(100))
+  s_result = db.Column(db.String(100))
+  suicidal_result = db.Column(db.String(100))
 
   def __init__(self, name, email, password):
     self.name = name
@@ -164,11 +166,14 @@ class userHero(db.Model):
     self.age_group = age_group
     self.about = about
 
-  # def update_results(self, d_result, a_result, s_result, suicidal_result):
-  #   self.d_result = d_result
-  #   self.a_result = a_result
-  #   self.s_result = s_result
-  #   self.suicidal_result = suicidal_result
+  def update_counselor(self, counselor):
+    self.counselor = counselor
+
+  def update_results(self, d_result, a_result, s_result, suicidal_result):
+    self.d_result = d_result
+    self.a_result = a_result
+    self.s_result = s_result
+    self.suicidal_result = suicidal_result
 
 
 class userCounselor(db.Model):
@@ -499,7 +504,7 @@ def questions2():
 
       db.session.commit()
 
-      return redirect(url_for('landing_page'))
+      return redirect(url_for('select_counselor'))
   else:
     return render_template('counselor_access_denied_questions.html',
                            user=user1)
@@ -512,26 +517,107 @@ def questions2():
 #   add_answers_to_db(data)
 #   return render_template('result.html', answers=data)
 
-# @app.route("/select_counselor")
-# def select_counselor():
-#   ages = load_distinct_age_from_db()
-#   genders = load_distinct_gender_from_db()
-#   time = load_distinct_time_from_db()
-#   return render_template('select_counselor.html',
-#                          ages=ages,
-#                          genders=genders,
-#                          time=time)
 
-# @app.route("/available_counselors", methods=['post', 'get'])
-# def available_counselors():
-#   gender = request.form['gender']
-#   age = request.form['age']
-#   time = request.form['time']
-#   counselors = load_available_counselors_from_db(gender, age, time)
-#   return render_template('available_counselors.html', counselors=counselors)
+@app.route("/select_counselor")
+def select_counselor():
+
+  user = None
+  user1 = None
+
+  unique_genders = [
+      gender[0]
+      for gender in db.session.query(userCounselor.gender).distinct().all()
+  ]
+  unique_ages = [
+      age[0] for age in db.session.query(userCounselor.age).distinct().all()
+  ]
+  unique_occupations = [
+      occupation[0] for occupation in db.session.query(
+          userCounselor.occupation).distinct().all()
+  ]
+  unique_times = [
+      time[0]
+      for time in db.session.query(userCounselor.time).distinct().all()
+  ]
+
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+  if user:
+    return render_template('select_counselor.html',
+                           user=user,
+                           genders=unique_genders,
+                           ages=unique_ages,
+                           occupations=unique_occupations,
+                           times=unique_times)
+  else:
+    return render_template('home.html', user=user1)
 
 
-@app.route("/counselor/profile")
+@app.route("/available_counselors", methods=['post', 'get'])
+def available_counselors():
+  user = None
+  user1 = None
+
+  gender = request.form['gender']
+  occupation = request.form['occupation']
+  time = request.form['time']
+  age = request.form['age']
+
+  counselors = userCounselor.query.filter_by(gender=gender,
+                                             occupation=occupation,
+                                             age=age,
+                                             time=time).all()
+
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+  if user:
+    return render_template('available_counselors.html',
+                           user=user,
+                           counselors=counselors)
+  else:
+    return render_template('home.html', user=user1)
+
+
+@app.route("/counselor/profile", methods=['post', 'get'])
+def counselor_page():
+  user = None
+  user1 = None
+
+  counselor_email = request.form['email']
+  counselor = userCounselor.query.filter_by(email=counselor_email).first()
+
+  email_connect = request.form.get('email_connect')
+
+  if email_connect:
+    counselor_name = userCounselor.query.filter_by(email=email_connect).first().name
+  else:
+    counselor_name = None
+
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+  if counselor_name:
+    user.update_counselor(counselor_name)
+    db.session.commit()
+    return render_template('counselor_page.html',
+                           user=user,
+                           counselor=counselor,
+                           Connected="Connected")
+
+  if user:
+    return render_template('counselor_page.html',
+                           user=user,
+                           counselor=counselor)
+  else:
+    return render_template('home.html', user=user1)
+
+
+@app.route("/profile")
 def user_profile():
   user = None
   user1 = None
@@ -558,7 +644,18 @@ def user_profile():
 
 @app.route("/trial")
 def trial():
-  return render_template('select_counselor.html')
+  user = None
+  user1 = None
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+  if user:
+    return render_template('counselor_page.html', user=user)
+  elif user1:
+    return render_template('home.html', user=user1)
+  else:
+    return render_template('counselor_page.html', counselor=user, user=user1)
 
 
 # @app.route("/api/answers", methods=['GET', 'POST'])
