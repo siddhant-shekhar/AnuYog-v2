@@ -1,8 +1,29 @@
 from flask import Flask, render_template, request, jsonify, url_for, redirect, session, g
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
+import pickle
+import numpy as np
 
 app = Flask(__name__)
+
+
+with open('model_d.pkl', 'rb') as model_file:
+  loaded_objects_d = pickle.load(model_file)
+
+model_d = loaded_objects_d["model"]
+scaler_d = loaded_objects_d["scaler"]
+
+with open('model_a.pkl', 'rb') as model_file:
+  loaded_objects_a = pickle.load(model_file)
+
+model_a = loaded_objects_a["model"]
+scaler_a = loaded_objects_a["scaler"]
+
+with open('model_s.pkl', 'rb') as model_file:
+  loaded_objects_s = pickle.load(model_file)
+
+model_s = loaded_objects_s["model"]
+scaler_s = loaded_objects_s["scaler"]
 
 ####################################################################################################################
 
@@ -340,7 +361,6 @@ def login_counselor():
 
     if user and user.check_password(password):
       session['email'] = user.email
-
       return redirect(url_for('landing_page'))
 
     else:
@@ -355,15 +375,6 @@ def logout():
   session.pop('email', None)
   return redirect('/')
 
-
-# @app.route("/counselor/registered", methods=['post'])
-# def register_as_counselor():
-#   data = request.form
-#   add_counselor_to_db(data)
-#   return render_template(
-#     'counselor_registered.html',
-#     counselor=data,
-#   )
 
 
 @app.route("/")
@@ -504,18 +515,46 @@ def questions2():
 
       db.session.commit()
 
-      return redirect(url_for('select_counselor'))
+      return redirect(url_for('result'))
   else:
     return render_template('counselor_access_denied_questions.html',
                            user=user1)
   return render_template('questions2.html', user=user)
 
 
-# @app.route("/result", methods=['post'])
-# def result():
-#   data = request.form
-#   add_answers_to_db(data)
-#   return render_template('result.html', answers=data)
+@app.route("/result", methods=['post', 'get'])
+def result():
+  user = None
+  user1 = None
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+  if user:
+    details_d = [user.Q3A, user.Q5A, user.Q10A, user.Q13A, user.Q16A, user.Q17A, user.Q21A, user.Q24A, user.Q26A, user.Q31A, user.Q34A, user.Q37A, user.Q38A, user.Q42A, user.TIPI1, user.TIPI2, user.TIPI3, user.TIPI4, user.TIPI5, user.TIPI6, user.TIPI7, user.TIPI8, user.TIPI9, user.TIPI10, user.education, user.urban, user.gender, user.married, user.familysize, user.age_group]
+
+    details_a = [user.Q2A, user.Q4A, user.Q7A, user.Q9A, user.Q15A, user.Q19A, user.Q20A, user.Q23A, user.Q25A, user.Q28A, user.Q30A, user.Q36A, user.Q40A, user.Q41A, user.TIPI1, user.TIPI2, user.TIPI3, user.TIPI4, user.TIPI5, user.TIPI6, user.TIPI7, user.TIPI8, user.TIPI9, user.TIPI10, user.education, user.urban, user.gender, user.married, user.familysize, user.age_group]
+
+    details_s = [user.Q1A, user.Q6A, user.Q8A, user.Q11A, user.Q12A, user.Q14A, user.Q18A, user.Q22A, user.Q27A, user.Q29A, user.Q32A, user.Q33A, user.Q35A, user.Q39A, user.Q41A, user.TIPI1, user.TIPI2, user.TIPI3, user.TIPI4, user.TIPI5, user.TIPI6, user.TIPI7, user.TIPI8, user.TIPI9, user.TIPI10, user.education, user.urban, user.gender, user.married, user.familysize, user.age_group]
+
+    details_d = np.array(details_d).reshape(1, -1)
+    details_a = np.array(details_a).reshape(1, -1)
+    details_s = np.array(details_s).reshape(1, -1)
+
+    details_d = scaler_d.transform(details_d)
+    details_a = scaler_a.transform(details_a)
+    details_s = scaler_s.transform(details_s)
+
+    d_result = model_d.predict(details_d)[0]
+    a_result = model_a.predict(details_a)[0]
+    s_result = model_s.predict(details_s)[0]
+    suicidal_result = "coming soon"
+
+    user.update_results(d_result, a_result, s_result, suicidal_result)
+    
+    return render_template('result.html', user=user)
+  else:
+    return render_template('home.html', user=user1)
 
 
 @app.route("/select_counselor")

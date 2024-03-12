@@ -3,7 +3,7 @@
   
   <head>
     
-    <title>Answers - AnuYog</title>
+    <title>Result ({{user.name}}) - AnuYog</title>
     <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
     
     {% include 'bootstrap_css.html' %}
@@ -24,98 +24,24 @@
     <div class="container">
       
 
-      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Your Answers</h1>
+      <h1 class="text-center p-5 mt-4 mb-4" style="color:rgb(150,110,300);">Your Result</h1>
+
+      <div class="row">
   
+        <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Depression level:</label>
+        <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.d_result}}</label>
+  
+        <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Anxiety level:</label>
+        <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.a_result}}</label>
+  
+        <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Stress level:</label>
+        <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.s_result}}</label>
+  
+        <label class="col-4 col-form-label" style="font-size:20px;color:rgb(255, 0, 0); font-family:Lucida Console;">Suicidal tendency:</label>
+        <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.suicidal_result}}</label>
 
-      <!-- <b>Little interest or pleasure in doing things:</b>
-      <div class="mb-2">{{answers['question_1']}}</div>
+      </div>
 
-      <b>Feeling down, depressed, or hopeless:</b>
-      <div class="mb-2">{{answers['question_2']}}</div>
-
-      <b>Trouble falling or staying asleep, or sleeping too much:</b>
-      <div class="mb-2">{{answers['question_3']}}</div>
-
-      <b>Feeling tired or having little energy:</b>
-      <div class="mb-2">{{answers['question_4']}}</div>
-
-      <b>Poor appetite or overeating:</b>
-      <div class="mb-2">{{answers['question_5']}}</div>
-
-      <b>Feeling bad about yourself—or that you are a failure or have let yourself or your family down:</b>
-      <div class="mb-2">{{answers['question_6']}}</div>
-
-      <b>Trouble concentrating on things such as reading the newspaper or watching television::</b>
-      <div class="mb-2">{{answers['question_7']}}</div>
-
-      <b>Moving or speaking so slowly that other people could have noticed. Or the opposite—being so fidgety or restless that you have been moving around a lot more than usual:</b>
-      <div class="mb-2">{{answers['question_8']}}</div>
-
-      <b>Thoughts that you would be better off dead or of hurting yourself in some way:</b>
-      <div class="mb-2">{{answers['question_9']}}</div>
-
-      <b>I feel pleasant:</b>
-      <div class="mb-2">{{answers['question_10']}}</div>
-
-      <b>I feel nervous and restless:</b>
-      <div class="mb-2">{{answers['question_11']}}</div>
-
-      <b>I feel satisfied with myself:</b>
-      <div class="mb-2">{{answers['question_12']}}</div>
-
-      <b>I wish I could be as happy as others seem to be:</b>
-      <div class="mb-2">{{answers['question_13']}}</div>
-
-      <b>I feel like a failure:</b>
-      <div class="mb-2">{{answers['question_14']}}</div>
-
-      <b>I feel rested:</b>
-      <div class="mb-2">{{answers['question_15']}}</div>
-
-      <b>I am “calm, cool, and collected:</b>
-      <div class="mb-2">{{answers['question_16']}}</div>
-
-      <b>I feel that difficulties are piling up so that I cannot overcome them:</b>
-      <div class="mb-2">{{answers['question_17']}}</div>
-
-      <b>I worry too much over something that really doesn’t matter:</b>
-      <div class="mb-2">{{answers['question_18']}}</div>
-
-      <b>I am happy:</b>
-      <div class="mb-2">{{answers['question_19']}}</div>
-
-      <b>I have disturbing thoughts:</b>
-      <div class="mb-2">{{answers['question_20']}}</div>
-
-      <b>I lack self-confidence:</b>
-      <div class="mb-2">{{answers['question_21']}}</div>
-
-      <b>I feel secure:</b>
-      <div class="mb-2">{{answers['question_22']}}</div>
-
-      <b>I make decisions easily:</b>
-      <div class="mb-2">{{answers['question_23']}}</div>
-
-      <b>I feel inadequate:</b>
-      <div class="mb-2">{{answers['question_24']}}</div>
-
-      <b>I am content:</b>
-      <div class="mb-2">{{answers['question_25']}}</div>
-
-      <b>Some unimportant thought runs through my mind and bothers me:</b>
-      <div class="mb-2">{{answers['question_26']}}</div>
-
-      <b>I take disappointments so keenly that I can’t put them out of my mind:</b>
-      <div class="mb-2">{{answers['question_27']}}</div>
-
-      <b>I am a steady person:</b>
-      <div class="mb-2">{{answers['question_28']}}</div>
-
-      <b>I get in a state of tension or turmoil as I think over my recent concerns:</b>
-      <div class="mb-2">{{answers['question_29']}}</div>
-
-      <b>Tell us about yourself:</b>
-      <div class="mb-2">{{answers['question_30']}}</div> -->
 
     </div>
     
