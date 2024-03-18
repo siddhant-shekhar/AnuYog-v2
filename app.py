@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 from sqlalchemy import desc
 from flask_socketio import join_room, leave_room, send, SocketIO
+import json
 
 # from viz import visualize_male_female_ratio_in_hero
 # import matplotlib.pyplot as plt
@@ -34,6 +35,26 @@ with open('model_s.pkl', 'rb') as model_file:
 
 model_s = loaded_objects_s["model"]
 scaler_s = loaded_objects_s["scaler"]
+
+
+####################################################################################################################
+rooms = {}
+# Function to save the rooms dictionary to a JSON file
+def save_rooms(rooms):
+    with open("rooms.json", "w") as file:
+        json.dump(rooms, file)
+
+# Function to load the rooms dictionary from a JSON file
+def load_rooms():
+    try:
+        with open("rooms.json", "r") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        # Return an empty dictionary if the file doesn't exist
+        return {}
+
+# Load the rooms dictionary from file when the program starts
+rooms = load_rooms()
 
 ####################################################################################################################
 # Making database and functions to store user data 
@@ -120,6 +141,8 @@ class userHero(db.Model):
   suicidal_result = db.Column(db.String(100))
 
   room_id = db.Column(db.String(100))
+
+  # suicidal_tendency_count = db.Column(db.Integer, default = 0)
 
   # saving hero's detail in table
   def __init__(self, name, email, password):
@@ -214,8 +237,20 @@ class userHero(db.Model):
     self.s_result = s_result
     self.suicidal_result = suicidal_result
 
+  # saving hero's room id
   def update_room_id(self, room_id):
     self.room_id = room_id
+
+  # updating suicidal_count
+  # def update_suicidal_tendency_count(self, message):
+  #   message_vectorized = vectorizer.transform([message])
+  #   pred = suicidal_model.predict(message_vectorized)
+
+  #   if pred == "suicidal":
+  #     self.suicidal_tendency_count += 1
+
+  #   db.session.commit()
+
 
 ###############################################################
 
@@ -268,8 +303,6 @@ class connection(db.Model):
 with app.app_context():
   db.create_all()
 
-
-rooms = {}
 
 ####################################################################################################################
 
@@ -763,8 +796,8 @@ def chat():
 
   if user:
     room = request.form['room_id']
-    # session["room"] = room
-    # session["name"] = user.name
+    session["room"] = room
+    session["name"] = user.name
     if room is None or session.get("name") is None or room not in rooms:
       return redirect(url_for("user_profile"))
   
@@ -774,8 +807,8 @@ def chat():
                            messages=rooms[room]["messages"])
   elif user1:
     room = request.form['room_id']
-    # session["room"] = room
-    # session["name"] = user1.name
+    session["room"] = room
+    session["name"] = user1.name
     if room is None or session.get("name") is None or room not in rooms:
       return redirect(url_for("user_profile"))
 
@@ -792,9 +825,22 @@ def message(data):
   if room not in rooms:
     return
 
+  # user = None
+  # user1 = None
+
+  # if 'email' in session:
+  #   user = userHero.query.filter_by(email=session['email']).first()
+    # user1 = userCounselor.query.filter_by(email=session['email']).first()
+
   content = {"name": session.get("name"), "message": data["data"]}
+
+  # if user:
+  #   user.update_suicidal_tendency_count(content["message"])
+
+
   send(content, to=room)
   rooms[room]["messages"].append(content)
+  save_rooms(rooms)
   print(f"{session.get('name')} said: {data['data']}")
 
 
@@ -835,20 +881,21 @@ def disconnect():
 ####################################################################################################################
 
 
-# @app.route("/trial")
-# def trial():
-#   user = None
-#   user1 = None
-#   if 'email' in session:
-#     user = userHero.query.filter_by(email=session['email']).first()
-#     user1 = userCounselor.query.filter_by(email=session['email']).first()
+@app.route("/api/trial", methods = ['GET', 'POST'])
+def trial():
+  user = None
+  user1 = None
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
+    user1 = userCounselor.query.filter_by(email=session['email']).first()
 
-#   if user:
-#     return render_template('counselor_page.html', user=user)
-#   elif user1:
-#     return render_template('home.html', user=user1)
-#   else:
-#     return render_template('counselor_page.html', counselor=user, user=user1)
+  # if user:
+  #   return render_template('counselor_page.html', user=user)
+  # elif user1:
+  #   return render_template('home.html', user=user1)
+  # else:
+  #   return render_template('counselor_page.html', counselor=user, user=user1)
+  return jsonify(rooms)
 
 
 @app.route("/api/userHero_table", methods=['GET', 'POST'])
