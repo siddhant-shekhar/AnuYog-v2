@@ -33,6 +33,10 @@
         <div class="col-6">
           <div class="row">
 
+            {% if error %}
+              {{error}}
+            {% endif %}
+
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Gender:</label><br>
             <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{counselor.gender}}</label>
 
@@ -57,7 +61,17 @@
             <br><br><br><br>
 
             {% if Connected %}
-              <div class="text-center"><button type="submit" class="btn btn-primary" disabled>{{Connected}}</button></div>
+              <div class="text-center"><button type="submit" class="btn btn-primary" disabled>{{Connected}}</button></div><br><br><br>
+
+
+              <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Chat Now:</label><br>
+              <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">
+                <form action="/chat" method="post">
+                  <input type="hidden" name="room_id" value = {{user.room_id}}>
+                  <button type="submit" name="join" class="btn btn-outline-primary">Chat</button>
+                </form>
+              </label>
+
   
               <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">WhatsApp:</label><br>
               <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://api.whatsapp.com/send/?phone=91{{counselor.phone_no}}&text=Hi%20{{counselor.name}},%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you.&type=phone_number&app_absent=0" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(10,200,5);">WhatsApp me 💬</a></label>
@@ -67,6 +81,7 @@
   
               <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Online Meet:</label><br>
               <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;"><a href="https://meet.google.com/gig-xndy-yaq" class="link-offset-2 link-underline link-underline-opacity-0" style="color:rgb(255,0,0);">Google Meet</a></label>
+
 
             {% else %}
               <form action="/counselor/profile" method="post">
@@ -110,6 +125,3 @@
   </body>
 
 </html>
-
-
-<!-- https://wa.me/{{counselor.phone_no}}?text=Hello,%20{{counselor.name}}.%20I%20came%20here%20through%20AnuYog%20to%20seek%20some%20help%20from%20you -->

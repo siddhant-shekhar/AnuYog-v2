@@ -40,7 +40,12 @@
             <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.email}}</label>
 
             <label class="col-4 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">Last Connected Counselor:</label><br>
-            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.counselor}}</label>
+            <label class="col-8 col-form-label" style="font-size:20px;color:rgb(100,100,100); font-family:Lucida Console;">
+              <form action="/chat" method="post">
+                <input type="hidden" name="room_id" value = {{user.room_id}}>
+                <button type="submit" name="join" class="btn btn-outline-primary">{{counselor.name}}</button>
+              </form>
+            </label>
 
 
           </div>
@@ -307,16 +312,16 @@
       <div class = "row">
 
         <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Depression level:</label><br>
-        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.d_result}}</label>
 
         <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Anxiety Level:</label><br>
-        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.a_result}}</label>
 
         <label class="col-7 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">Stress Level:</label><br>
-        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.s_result}}</label>
 
         <label class="col-7 col-form-label" style="font-size:18px;color:rgb(255,0,0); font-family:Lucida Console;">Suicidal Tendency:</label><br>
-        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;"></label>
+        <label class="col-5 col-form-label" style="font-size:18px;color:rgb(100,100,100); font-family:Lucida Console;">{{user.suicidal_result}}</label>
         
       </div>
       

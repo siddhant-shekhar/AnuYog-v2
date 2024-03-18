@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Chat - AnuYog</title>
+    <link rel="icon" type="images/x-icon" href="/static/logo- AnuYog.png" />
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+      integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+      crossorigin="anonymous">
+    </script>
+
+    {% include 'bootstrap_css.html' %}
+    {% include 'lottie_script.html' %}
+
+  </head>
+
+  <body>
+
+    <!--navigation bar-->
+    {% include 'nav.html' %}
+
+
+    <div class="container mt-3">
+      <div class= "row justify-content-center">
+        <div class="text-center col-sm-8"><br>
+          <h2>CHAT</h2>
+          <br>
+
+          <div class = "justify-content-center">
+          
+            <div class="message-box">
+              <h2>Chat Room: {{code}}</h2>
+              <div class="messages" id="messages"></div>
+              <div class="inputs">
+                <textarea
+                    rows="2"
+                    placeholder="Message"
+                    name="message"
+                    id="message"
+                ></textarea>
+                <button class = "btn btn-info" type="button" name="send" id="send-btn" onClick="sendMessage()">
+                  Send
+                </button>
+              </div>
+            </div>
+            <script type="text/javascript">
+              var socketio = io();
+
+              const messages = document.getElementById("messages");
+
+              const createMessage = (name, msg) => {
+                const content = `
+                <div class="text">
+                    <span>
+                        <strong>${name}</strong>: ${msg}
+                    </span>
+                    <span class="muted">
+                        ${new Date().toLocaleString()}
+                    </span>
+                </div>
+                `;
+                messages.innerHTML += content;
+              };
+
+              socketio.on("message", (data) => {
+                createMessage(data.name, data.message);
+              });
+
+              const sendMessage = () => {
+                const message = document.getElementById("message");
+                if (message.value == "") return;
+                socketio.emit("message", { data: message.value });
+                message.value = "";
+              };
+              document.getElementById("message").addEventListener("keypress", function(e) {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                      sendMessage();
+                      e.preventDefault(); // Prevents adding a new line in the input field
+                  }
+              });
+            </script>
+            {% for msg in messages %}
+            <script type="text/javascript">
+              createMessage("{{msg.name}}", "{{msg.message}}");
+            </script>
+            {% endfor %}
+
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+
+    <!--footer area-->
+    {% include 'footer.html' %}
+
+
+  <!--javascript file-->
+  {% include 'bootstrap_js.html' %}
+
+  </body>
+
+</html>

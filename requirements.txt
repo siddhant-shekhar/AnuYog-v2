@@ -10,3 +10,4 @@ wtforms
 email_validator
 bcrypt
 scikit-learn
+flask-socketio

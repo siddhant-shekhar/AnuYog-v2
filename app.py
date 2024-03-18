@@ -3,9 +3,19 @@ from flask_sqlalchemy import SQLAlchemy
 import bcrypt
 import pickle
 import numpy as np
+from sqlalchemy import desc
+from flask_socketio import join_room, leave_room, send, SocketIO
+
+# from viz import visualize_male_female_ratio_in_hero
+# import matplotlib.pyplot as plt
+
+
 
 app = Flask(__name__)
+socketio = SocketIO(app)
 
+####################################################################################################################
+# Importing ml models
 
 with open('model_d.pkl', 'rb') as model_file:
   loaded_objects_d = pickle.load(model_file)
@@ -26,6 +36,9 @@ model_s = loaded_objects_s["model"]
 scaler_s = loaded_objects_s["scaler"]
 
 ####################################################################################################################
+# Making database and functions to store user data 
+
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
@@ -33,12 +46,14 @@ db = SQLAlchemy(app)
 app.secret_key = 'secret_key'
 
 
+# Hero table
 class userHero(db.Model):
+  # info column
   id = db.Column(db.Integer, primary_key=True)
   name = db.Column(db.String(100), nullable=False)
-  email = db.Column(db.String(100), nullable=False)
+  email = db.Column(db.String(100), unique = True, nullable=False)
   password = db.Column(db.String(100), nullable=False)
-  #question and answer
+  #question and answer columns
   Q1A = db.Column(db.Integer)
   Q2A = db.Column(db.Integer)
   Q3A = db.Column(db.Integer)
@@ -99,23 +114,26 @@ class userHero(db.Model):
   age_group = db.Column(db.Integer)
   about = db.Column(db.String(1000))
 
-  counselor = db.Column(db.String(100))
-
   d_result = db.Column(db.String(100))
   a_result = db.Column(db.String(100))
   s_result = db.Column(db.String(100))
   suicidal_result = db.Column(db.String(100))
 
+  room_id = db.Column(db.String(100))
+
+  # saving hero's detail in table
   def __init__(self, name, email, password):
     self.name = name
     self.email = email
     self.password = bcrypt.hashpw(password.encode('utf-8'),
                                   bcrypt.gensalt()).decode('utf-8')
 
+  # matching and checking password
   def check_password(self, password):
     return bcrypt.checkpw(password.encode('utf-8'),
                           self.password.encode('utf-8'))
 
+  # saving hero's set 1 questions (DASS) in table
   def update_answers(self, Q1A, Q2A, Q3A, Q4A, Q5A, Q6A, Q7A, Q8A, Q9A, Q10A,
                      Q11A, Q12A, Q13A, Q14A, Q15A, Q16A, Q17A, Q18A, Q19A,
                      Q20A, Q21A, Q22A, Q23A, Q24A, Q25A, Q26A, Q27A, Q28A,
@@ -164,6 +182,7 @@ class userHero(db.Model):
     self.Q41A = Q41A
     self.Q42A = Q42A
 
+  # saving hero's set 2 questions (TIPI) in table
   def update_answers1(self, TIPI1, TIPI2, TIPI3, TIPI4, TIPI5, TIPI6, TIPI7,
                       TIPI8, TIPI9, TIPI10):
     self.TIPI1 = TIPI1
@@ -177,6 +196,7 @@ class userHero(db.Model):
     self.TIPI9 = TIPI9
     self.TIPI10 = TIPI10
 
+  # saving hero's set 3 questions (personal info) in table
   def update_answers2(self, education, urban, gender, married, familysize,
                       age_group, about):
     self.education = education
@@ -187,19 +207,22 @@ class userHero(db.Model):
     self.age_group = age_group
     self.about = about
 
-  def update_counselor(self, counselor):
-    self.counselor = counselor
-
+  # saving hero's results got from the ml model
   def update_results(self, d_result, a_result, s_result, suicidal_result):
     self.d_result = d_result
     self.a_result = a_result
     self.s_result = s_result
     self.suicidal_result = suicidal_result
 
+  def update_room_id(self, room_id):
+    self.room_id = room_id
 
+###############################################################
+
+# Counselor's table
 class userCounselor(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  email = db.Column(db.String(100), nullable=False)
+  email = db.Column(db.String(100), unique = True, nullable=False)
   name = db.Column(db.String(100), nullable=False)
   password = db.Column(db.String(100), nullable=False)
   gender = db.Column(db.String(100), nullable=False)
@@ -209,6 +232,7 @@ class userCounselor(db.Model):
   phone_no = db.Column(db.String(100), nullable=False)
   about = db.Column(db.String(1000), nullable=False)
 
+  # saving counselor's info in table
   def __init__(self, email, name, password, gender, age, occupation, time,
                phone_no, about):
     self.email = email
@@ -222,15 +246,34 @@ class userCounselor(db.Model):
     self.phone_no = phone_no
     self.about = about
 
+  # matching and checking password
   def check_password(self, password):
     return bcrypt.checkpw(password.encode('utf-8'),
                           self.password.encode('utf-8'))
 
+###############################################################
+# making connection table for all connected counselors and heroes
 
+class connection(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  counselor_email = db.Column(db.String(100), nullable=False)
+  hero_email = db.Column(db.String(100), nullable=False)
+
+  def __init__(self, counselor_email, hero_email):
+    self.counselor_email = counselor_email
+    self.hero_email = hero_email
+
+###############################################################
+# creating i.e commiting the db
 with app.app_context():
   db.create_all()
 
+
+rooms = {}
+
 ####################################################################################################################
+
+# Creating all the routes
 
 
 @app.route("/visualization")
@@ -282,7 +325,7 @@ def login():
 
 ###############################################################
 
-
+# hero registeration
 @app.route("/register_hero", methods=['GET', 'POST'])
 def register_hero():
   if request.method == 'POST':
@@ -299,7 +342,7 @@ def register_hero():
 
   return render_template('hero_register.html')
 
-
+# hero login
 @app.route("/login_hero", methods=['GET', 'POST'])
 def login_hero():
   if request.method == 'POST':
@@ -319,7 +362,7 @@ def login_hero():
 
   return render_template('hero_login.html')
 
-
+# counselor registeration
 @app.route("/register_counselor", methods=['GET', 'POST'])
 def register_counselor():
   if request.method == 'POST':
@@ -350,7 +393,7 @@ def register_counselor():
 
   return render_template('counselor_register.html')
 
-
+# counselor login 
 @app.route("/login_counselor", methods=['GET', 'POST'])
 def login_counselor():
   if request.method == 'POST':
@@ -375,8 +418,9 @@ def logout():
   session.pop('email', None)
   return redirect('/')
 
+###############################################################
 
-
+# landing page
 @app.route("/")
 def landing_page():
   user = None
@@ -391,16 +435,19 @@ def landing_page():
     return render_template('home.html', user=user1)
 
 
+# set 1 question (DASS)
 @app.route("/questions", methods=['GET', 'POST'])
 def questions():
   user = None
   user1 = None
+  # checking for the users, if logged in any
   if 'email' in session:
     user = userHero.query.filter_by(email=session['email']).first()
     user1 = userCounselor.query.filter_by(email=session['email']).first()
 
   if user:
     if request.method == 'POST':
+      # getting the answers from the form
       Q1A = request.form['Q1A']
       Q2A = request.form['Q2A']
       Q3A = request.form['Q3A']
@@ -444,6 +491,7 @@ def questions():
       Q41A = request.form['Q41A']
       Q42A = request.form['Q42A']
 
+      # updating the answers in the database
       user.update_answers(Q1A, Q2A, Q3A, Q4A, Q5A, Q6A, Q7A, Q8A, Q9A, Q10A,
                           Q11A, Q12A, Q13A, Q14A, Q15A, Q16A, Q17A, Q18A, Q19A,
                           Q20A, Q21A, Q22A, Q23A, Q24A, Q25A, Q26A, Q27A, Q28A,
@@ -551,6 +599,8 @@ def result():
     suicidal_result = "coming soon"
 
     user.update_results(d_result, a_result, s_result, suicidal_result)
+
+    db.session.commit()
     
     return render_template('result.html', user=user)
   else:
@@ -626,34 +676,34 @@ def counselor_page():
   user = None
   user1 = None
 
-  counselor_email = request.form['email']
+  counselor_email = request.form.get('email', '')
   counselor = userCounselor.query.filter_by(email=counselor_email).first()
 
   email_connect = request.form.get('email_connect')
 
-  if email_connect:
-    counselor_name = userCounselor.query.filter_by(email=email_connect).first().name
-  else:
-    counselor_name = None
+  # create = request.form.get('create')
 
   if 'email' in session:
     user = userHero.query.filter_by(email=session['email']).first()
     user1 = userCounselor.query.filter_by(email=session['email']).first()
 
-  if counselor_name:
-    user.update_counselor(counselor_name)
+  if email_connect:
+    new_connection = connection(counselor_email = email_connect, hero_email = session['email'])
+    room = user.name + counselor.name
+    user.update_room_id(room)
+    rooms[room] = {"members": 0, "messages": []}
+    session['name'] = user.name
+    db.session.add(new_connection)
     db.session.commit()
-    return render_template('counselor_page.html',
-                           user=user,
-                           counselor=counselor,
-                           Connected="Connected")
+    return render_template('counselor_page.html', user=user, counselor=counselor, Connected="Connected")
 
   if user:
     return render_template('counselor_page.html',
                            user=user,
-                           counselor=counselor)
+                           counselor=counselor)  
+
   else:
-    return render_template('home.html', user=user1)
+    return redirect(url_for('landing_page'))
 
 
 @app.route("/profile")
@@ -664,7 +714,25 @@ def user_profile():
     user = userHero.query.filter_by(email=session['email']).first()
     user1 = userCounselor.query.filter_by(email=session['email']).first()
 
+  # to find counselors name for the hero's page
+  connection_row = connection.query.filter_by(hero_email=session['email']).order_by(desc('id')).first()
+  counselor_email = connection_row.counselor_email if connection_row else None
+  counselor = userCounselor.query.filter_by(email=counselor_email).first()
+
+  # to find the heroes details for the counselors page
+  connection_rows = connection.query.filter_by(counselor_email=session['email']).all()
+  hero_emails = [row.hero_email for row in connection_rows]
+  heroes_data = []
+
+  for email in set(hero_emails):
+      hero = userHero.query.filter_by(email=email).first()
+      if hero:
+          session["room"] = hero.room_id
+          heroes_data.append((hero.name, hero.room_id))
+
   if user:
+    session["room"] = user.room_id
+    session["name"] = user.name
     return render_template('profile_hero.html',
                            user=user,
                            dass=convert.dass,
@@ -673,38 +741,114 @@ def user_profile():
                            urban=convert.urban,
                            gender=convert.gender,
                            married=convert.married,
-                           age=convert.age)
+                           age=convert.age, counselor = counselor)
+  elif user1:
+    session["name"] = user1.name
+    return render_template('profile_counselor.html', user=user1, heroes=heroes_data)
+
   else:
-    return render_template('profile_counselor.html', user=user1)
+    return redirect(url_for('landing_page')) 
 
+    
+#####################################
 
-####################################################################################################################
-
-
-@app.route("/trial")
-def trial():
+@app.route("/chat", methods=['post', 'get'])
+def chat():
   user = None
   user1 = None
+
   if 'email' in session:
     user = userHero.query.filter_by(email=session['email']).first()
     user1 = userCounselor.query.filter_by(email=session['email']).first()
 
   if user:
-    return render_template('counselor_page.html', user=user)
+    room = request.form['room_id']
+    # session["room"] = room
+    # session["name"] = user.name
+    if room is None or session.get("name") is None or room not in rooms:
+      return redirect(url_for("user_profile"))
+  
+    return render_template("chat.html",
+                           user = user,
+                           code=room,
+                           messages=rooms[room]["messages"])
   elif user1:
-    return render_template('home.html', user=user1)
+    room = request.form['room_id']
+    # session["room"] = room
+    # session["name"] = user1.name
+    if room is None or session.get("name") is None or room not in rooms:
+      return redirect(url_for("user_profile"))
+
+    return render_template("chat.html",
+                           user = user1,
+                           code=room,
+                           messages=rooms[room]["messages"])
   else:
-    return render_template('counselor_page.html', counselor=user, user=user1)
+    return redirect(url_for('landing_page'))
+
+@socketio.on("message")
+def message(data):
+  room = session.get("room")
+  if room not in rooms:
+    return
+
+  content = {"name": session.get("name"), "message": data["data"]}
+  send(content, to=room)
+  rooms[room]["messages"].append(content)
+  print(f"{session.get('name')} said: {data['data']}")
 
 
-# @app.route("/api/answers", methods=['GET', 'POST'])
-# def show_answers():
-#   if request.method == 'POST':
-#     answers = dict(request.form)
-#     return jsonify(answers)
+@socketio.on("connect")
+def connect(auth):
+  room = session.get("room")
+  name = session.get("name")
+  if not room or not name:
+    return
+  if room not in rooms:
+    leave_room(room)
+    return
+
+  join_room(room)
+  send({"name": name, "message": "has joined the chat"}, to=room)
+  rooms[room]["members"] += 1
+  print(f"{name} joined room {room}")
+
+
+@socketio.on("disconnect")
+def disconnect():
+  room = session.get("room")
+  name = session.get("name")
+  leave_room(room)
+
+  if room in rooms:
+    rooms[room]["members"] -= 1
+    if rooms[room]["members"] <= 0:
+      pass
+
+  send({"name": name, "message": "has left the chat"}, to=room)
+  print(f"{name} has left the chat")
+
+
+################################### 
+
+
+####################################################################################################################
+
+
+# @app.route("/trial")
+# def trial():
+#   user = None
+#   user1 = None
+#   if 'email' in session:
+#     user = userHero.query.filter_by(email=session['email']).first()
+#     user1 = userCounselor.query.filter_by(email=session['email']).first()
+
+#   if user:
+#     return render_template('counselor_page.html', user=user)
+#   elif user1:
+#     return render_template('home.html', user=user1)
 #   else:
-#     # Handle GET requests
-#     return render_template("home.html")
+#     return render_template('counselor_page.html', counselor=user, user=user1)
 
 
 @app.route("/api/userHero_table", methods=['GET', 'POST'])
@@ -732,24 +876,16 @@ def show_table1():
 
   return jsonify(all_rows)
 
+@app.route("/api/connection_table", methods=['GET', 'POST'])
+def show_table2():
+  user_data = connection.query.all()
+  all_rows = []
+  for row in user_data:
+    row_dict = row.__dict__
+    row_dict.pop('_sa_instance_state', None)
+    all_rows.append(row_dict)
 
-# @app.route("/api/counselors")
-# def show_counselors():
-#   counselors = load_counselors_from_db()
-#   return jsonify(counselors)
-
-# @app.route("/api/time", methods=['post', 'get'])
-# def show_gender():
-#   gender = request.form['gender']
-#   age = request.form['age']
-#   time = request.form['time']
-#   answer = load_available_counselors_from_db(gender, age, time)
-#   return jsonify(answer)
-
-# @app.route("/api/name/<name>")
-# def name(name):
-#   name = dict(selected_counselor_from_db(name))
-#   return jsonify(name)
+  return jsonify(all_rows)
 
 
 class convert():
@@ -831,4 +967,4 @@ class convert():
 
 ####################################################################################################################
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', debug=True)
+  socketio.run(app, host='0.0.0.0', debug=True)
