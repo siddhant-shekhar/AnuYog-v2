@@ -7,7 +7,7 @@ from sqlalchemy import desc
 from flask_socketio import join_room, leave_room, send, SocketIO
 import json
 
-# from viz import visualize_male_female_ratio_in_hero
+from viz import visualize_male_female_ratio_in_hero
 # import matplotlib.pyplot as plt
 
 
@@ -35,6 +35,12 @@ with open('model_s.pkl', 'rb') as model_file:
 
 model_s = loaded_objects_s["model"]
 scaler_s = loaded_objects_s["scaler"]
+
+with open('suicide_model.pkl', 'rb') as model_file:
+  loaded_objects_suicide = pickle.load(model_file)
+
+suicide = loaded_objects_suicide["model"]
+vectorizer = loaded_objects_suicide["vectorizer"]
 
 
 ####################################################################################################################
@@ -142,7 +148,7 @@ class userHero(db.Model):
 
   room_id = db.Column(db.String(100))
 
-  # suicidal_tendency_count = db.Column(db.Integer, default = 0)
+  suicidal_tendency_count = db.Column(db.Integer, default = 0)
 
   # saving hero's detail in table
   def __init__(self, name, email, password):
@@ -242,14 +248,14 @@ class userHero(db.Model):
     self.room_id = room_id
 
   # updating suicidal_count
-  # def update_suicidal_tendency_count(self, message):
-  #   message_vectorized = vectorizer.transform([message])
-  #   pred = suicidal_model.predict(message_vectorized)
+  def update_suicidal_tendency_count(self, message):
+    message_vectorized = vectorizer.transform([message])
+    pred = suicide.predict(message_vectorized)
 
-  #   if pred == "suicidal":
-  #     self.suicidal_tendency_count += 1
+    if pred == "suicide":
+      self.suicidal_tendency_count += 1
 
-  #   db.session.commit()
+    db.session.commit()
 
 
 ###############################################################
@@ -317,8 +323,12 @@ def visualization():
     user = userHero.query.filter_by(email=session['email']).first()
     user1 = userCounselor.query.filter_by(email=session['email']).first()
 
+  male_count = userHero.query.filter_by(gender=1).count()
+  female_count = userHero.query.filter_by(gender=2).count()
+
   if user:
-    return render_template('visualization.html', user=user)
+    plot_img = visualize_male_female_ratio_in_hero(male_count, female_count)
+    return render_template('visualization.html', user=user, plot_img=plot_img, male_count=male_count, female_count=female_count)
   else:
     return render_template('visualization.html', user=user1)
 
@@ -618,6 +628,8 @@ def result():
 
     details_s = [user.Q1A, user.Q6A, user.Q8A, user.Q11A, user.Q12A, user.Q14A, user.Q18A, user.Q22A, user.Q27A, user.Q29A, user.Q32A, user.Q33A, user.Q35A, user.Q39A, user.Q41A, user.TIPI1, user.TIPI2, user.TIPI3, user.TIPI4, user.TIPI5, user.TIPI6, user.TIPI7, user.TIPI8, user.TIPI9, user.TIPI10, user.education, user.urban, user.gender, user.married, user.familysize, user.age_group]
 
+    about = user.about
+
     details_d = np.array(details_d).reshape(1, -1)
     details_a = np.array(details_a).reshape(1, -1)
     details_s = np.array(details_s).reshape(1, -1)
@@ -625,11 +637,12 @@ def result():
     details_d = scaler_d.transform(details_d)
     details_a = scaler_a.transform(details_a)
     details_s = scaler_s.transform(details_s)
+    about = vectorizer.transform([about])
 
     d_result = model_d.predict(details_d)[0]
     a_result = model_a.predict(details_a)[0]
     s_result = model_s.predict(details_s)[0]
-    suicidal_result = "coming soon"
+    suicidal_result = suicide.predict(about)
 
     user.update_results(d_result, a_result, s_result, suicidal_result)
 
@@ -714,7 +727,6 @@ def counselor_page():
 
   email_connect = request.form.get('email_connect')
 
-  # create = request.form.get('create')
 
   if 'email' in session:
     user = userHero.query.filter_by(email=session['email']).first()
@@ -825,17 +837,17 @@ def message(data):
   if room not in rooms:
     return
 
-  # user = None
+  user = None
   # user1 = None
 
-  # if 'email' in session:
-  #   user = userHero.query.filter_by(email=session['email']).first()
+  if 'email' in session:
+    user = userHero.query.filter_by(email=session['email']).first()
     # user1 = userCounselor.query.filter_by(email=session['email']).first()
 
   content = {"name": session.get("name"), "message": data["data"]}
 
-  # if user:
-  #   user.update_suicidal_tendency_count(content["message"])
+  if user:
+    user.update_suicidal_tendency_count(content["message"])
 
 
   send(content, to=room)

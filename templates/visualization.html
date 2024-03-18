@@ -16,14 +16,19 @@
     <!--navigation bar-->
     {% include 'nav.html' %}
 
-    <div class="image-container" style="width: 100%;max-height: 850px;overflow: hidden; align-content: center;">
+    <!-- <div class="image-container" style="width: 100%;max-height: 850px;overflow: hidden; align-content: center;">
       <img src="/static/viz.png" style="width: 100%;height: auto;object-fit: cover; object-position: center; " alt="Your image">
-    </div>
+    </div> -->
 
         
     <div class="container">
   
-    
+      <img src="data:image/png;base64,{{ plot_img }}" alt="Male vs Female Ratio" width="600" height="400">
+      <h1>
+        male count: {{ male_count }}
+        female count: {{ female_count }}
+      </h1>
+
       
       
   
